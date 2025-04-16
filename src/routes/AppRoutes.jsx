@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from '../pages/Home';
 import Schedule from '../pages/Schedule';
 import Forum from '../pages/Forum';
+import PrivateRoute from '../components/PrivateRoute';
 
 export default function AppRoutes() {
   return (
@@ -15,7 +16,7 @@ export default function AppRoutes() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/schedule" element={<Schedule />} />
-        <Route path="/forum" element={<Forum />} />
+        <Route path="/forum" element={<PrivateRoute><Forum /> </PrivateRoute>} />
       </Routes>
     </Router>
   );
