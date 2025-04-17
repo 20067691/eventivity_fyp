@@ -2,14 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css'
 import App from './App.jsx'
-import { AuthProvider } from 'react-oidc-context';
-import {cognitoAuthConfig} from './auth/cognitoConfig.js'
+// import { AuthProvider } from 'react-oidc-context';
+// import {cognitoAuthConfig} from './auth/cognitoConfig.js'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <AuthProvider {...cognitoAuthConfig}>
       <App />
-    </AuthProvider>
   </React.StrictMode>
 );
 // // This code is the entry point for a React application.

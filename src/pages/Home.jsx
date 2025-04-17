@@ -1,10 +1,9 @@
-import Login from '../components/Login';
-
+import SignOutButton from "../components/SignOutButton";
 export default function Home() {
   return (
-    <div>
-      <h1>Welcome to Eventivity</h1>
-      <Login />
+    <div className="flex flex-col items-center justify-center min-h-screen bg-[#F7F4F4]">
+      <h1 className="text-4xl font-bold text-[#552834] mb-4">Welcome to Eventivity</h1>
+      <SignOutButton />
     </div>
   );
 }

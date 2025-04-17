@@ -1,22 +1,17 @@
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from '../pages/Home';
-import Schedule from '../pages/Schedule';
-import Forum from '../pages/Forum';
-import PrivateRoute from '../components/PrivateRoute';
+import SignUp from '../pages/SignUp';
+import ConfirmAccount from '../pages/ConfirmAccount';
+
 
 export default function AppRoutes() {
   return (
     <Router>
-      <nav style={{ padding: '1rem' }}>
-        <Link to="/" style={{ marginRight: '10px' }}>Home</Link>
-        <Link to="/schedule" style={{ marginRight: '10px' }}>Schedule</Link>
-        <Link to="/forum">Forum</Link>
-      </nav>
-
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/schedule" element={<Schedule />} />
-        <Route path="/forum" element={<PrivateRoute><Forum /> </PrivateRoute>} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/confirm" element={<ConfirmAccount />} />
+        {/* Future Routes here like /signin /signup /forum */}
       </Routes>
     </Router>
   );
