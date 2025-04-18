@@ -1,21 +1,64 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css'
-import App from './App.jsx'
-// import { AuthProvider } from 'react-oidc-context';
-// import {cognitoAuthConfig} from './auth/cognitoConfig.js'
+import App from './App.jsx';
+import './index.css';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { exchangeCodeForToken } from './services/AuthService'; // NEW
+
+function SessionManager() {
+  const { login, logout } = useAuth();
+
+  React.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+
+    // Handle logout flow
+    if (params.get('logout') === 'true') {
+      logout();
+    }
+
+    // Handle login code exchange flow
+    const code = params.get('code');
+    if (code) {
+      (async () => {
+        try {
+          const tokenResponse = await exchangeCodeForToken(code);
+          const idToken = tokenResponse.id_token;
+          const payload = parseJwt(idToken);
+          login(payload['cognito:username']); // Save username to Context
+        } catch (error) {
+          console.error('Token exchange error:', error);
+          logout();
+        }
+      })();
+    }
+  }, [login, logout]);
+
+  return null;
+}
+
+// Helper function to decode a JWT
+function parseJwt(token) {
+  try {
+    const base64Url = token.split('.')[1];
+    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    const jsonPayload = decodeURIComponent(
+      atob(base64)
+        .split('')
+        .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+        .join('')
+    );
+    return JSON.parse(jsonPayload);
+  } catch (error) {
+    console.error('Invalid JWT', error);
+    return {};
+  }
+}
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
+    <AuthProvider>
+      <SessionManager />
       <App />
+    </AuthProvider>
   </React.StrictMode>
 );
-// // This code is the entry point for a React application.
-// It uses React's StrictMode for highlighting potential problems in an application.
-// The createRoot function from 'react-dom/client' is used to render the App component into the DOM.
-// The App component is imported from './App.jsx'.
-// The index.css file is imported for global styles.
-// The createRoot function is called with the root element (with id 'root') to render the application.
-// The StrictMode component is used to wrap the App component, which helps in identifying potential problems in the application.
-// This is a standard setup for a React application, ensuring that the app is rendered correctly and efficiently.
-// The use of StrictMode is optional but recommended for development to help catch potential issues early.
