@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { userPool } from '../config/cognitoConfig'; // We'll create this
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
@@ -8,9 +8,12 @@ import {jwtDecode} from 'jwt-decode';
 function SignIn() {
     const { login } = useAuth();
     const navigate = useNavigate();
+    const location = useLocation();
     const [usernameInput, setUsernameInput] = useState('');
     const [passwordInput, setPasswordInput] = useState('');
     const [error, setError] = useState('');
+
+    const from = location.state?.from?.pathname || '/';
   
     const handleSignIn = (e) => {
         e.preventDefault();
@@ -42,7 +45,7 @@ function SignIn() {
             localStorage.setItem('accessToken', result.getAccessToken().getJwtToken());
       
             login(userData); // ✅ Save full user object
-            navigate('/');   // ✅
+            navigate(from, { replace: true }); // Redirect back to intended page
           },
           onFailure: (err) => {
             console.error('Login error:', err);
