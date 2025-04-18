@@ -1,7 +1,9 @@
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid'; // Install uuid package if needed
+import { useAuth } from '../context/AuthContext'; // ✅ Import auth context
+import { v4 as uuidv4 } from 'uuid';
 
 export default function PostForm({ posts, setPosts }) {
+  const { user } = useAuth(); // ✅ Get user info
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
@@ -15,14 +17,14 @@ export default function PostForm({ posts, setPosts }) {
     }
 
     const newPost = {
-      postId: uuidv4(), // Random unique ID
+      postId: uuidv4(),
       title: title.trim(),
       content: content.trim(),
-      username: 'dean', // 👈 Later replace with real logged-in user
+      username: user?.username || 'anonymous', // ✅ Pull username from context
       timestamp: new Date().toLocaleString(),
     };
 
-    setPosts([newPost, ...posts]); // Add new post to top
+    setPosts([newPost, ...posts]);
     setError('');
     setTitle('');
     setContent('');
