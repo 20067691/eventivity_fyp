@@ -38,3 +38,16 @@
 - EC2 (backend)
 - DynamoDB (data storage)
 - Cognito (user authentication)
+
+---
+
+## 🚀 Improvements Log (Post-Launch Ideas)
+
+| Feature | Status | Notes |
+|:--------|:-------|:------|
+| Password Visibility Toggle | ❌ | Add a toggle icon (👁️) to show/hide password fields in SignUp and SignIn forms for better usability. |
+| Enforce Unique Email During SignUp | ❌ | Modify backend/user pool rules to enforce unique emails like usernames, preventing duplicate accounts. |
+| Sign In / Sign Up navigation | ❌ | Have links on the home page to give options if a user already has an account or needs to sign up  |
+
+
+---

@@ -4,6 +4,8 @@ const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null); // 🛑 Instead of just username
+  const [flashMessage, setFlashMessage] = useState(null);
+
 
   useEffect(() => {
     const savedUser = JSON.parse(localStorage.getItem('user'));
@@ -15,6 +17,7 @@ export function AuthProvider({ children }) {
   const login = (userData) => {
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
+    setFlashMessage('Login successful!'); 
   };
 
   const logout = () => {
@@ -25,7 +28,7 @@ export function AuthProvider({ children }) {
   const isAuthenticated = !!user; // ✅ Computed
 
   return (
-    <AuthContext.Provider value={{ user, login, logout, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, login, logout, isAuthenticated, flashMessage, setFlashMessage }}>
       {children}
     </AuthContext.Provider>
   );
