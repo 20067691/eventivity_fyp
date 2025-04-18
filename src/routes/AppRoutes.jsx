@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from '../pages/Home';
 import SignUp from '../pages/SignUp';
 import ConfirmAccount from '../pages/ConfirmAccount';
+import SignIn from '../pages/SignIn';
 
 
 export default function AppRoutes() {
@@ -11,7 +12,7 @@ export default function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/confirm" element={<ConfirmAccount />} />
-        {/* Future Routes here like /signin /signup /forum */}
+        <Route path="/signin" element={<SignIn />} />
       </Routes>
     </Router>
   );
