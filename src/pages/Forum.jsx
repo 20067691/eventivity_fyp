@@ -2,9 +2,11 @@ import { useAuth } from '../context/AuthContext';
 import PostForm from '../components/PostForm';
 import PostList from '../components/PostList';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function Forum() {
   const { isAuthenticated } = useAuth();
+  const [posts, setPosts] = useState([]);
 
   if (!isAuthenticated) {
     return (
@@ -25,8 +27,8 @@ export default function Forum() {
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-[#F7F4F4] p-6 space-y-8">
-      <PostForm />
-      <PostList />
+      <PostForm setPosts={setPosts} posts={posts} />
+      <PostList posts={posts} />
     </div>
   );
 }

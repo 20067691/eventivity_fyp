@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import { useAuth } from '../context/AuthContext'; // ✅ Import auth context
+import { v4 as uuidv4 } from 'uuid';
 
-export default function PostForm() {
+export default function PostForm({ posts, setPosts }) {
+  const { user } = useAuth(); // ✅ Get user info
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
@@ -13,7 +16,15 @@ export default function PostForm() {
       return;
     }
 
-    console.log('New Post:', { title, content }); // ✅ Later we'll send this to backend
+    const newPost = {
+      postId: uuidv4(),
+      title: title.trim(),
+      content: content.trim(),
+      username: user?.username || 'anonymous', // ✅ Pull username from context
+      timestamp: new Date().toLocaleString(),
+    };
+
+    setPosts([newPost, ...posts]);
     setError('');
     setTitle('');
     setContent('');
