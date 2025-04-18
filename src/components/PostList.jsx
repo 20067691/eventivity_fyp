@@ -1,24 +1,5 @@
-import { useState } from 'react';
 
-export default function PostList() {
-  // Temporary dummy posts for now
-  const [posts] = useState([
-    {
-      postId: '1',
-      title: 'Welcome to the Eventivity Forum!',
-      content: 'Feel free to share your thoughts and media from the event.',
-      username: 'admin',
-      timestamp: '2025-04-18 10:00',
-    },
-    {
-      postId: '2',
-      title: 'Great Workshop Today!',
-      content: 'Loved the Python for Beginners session. Really well organized!',
-      username: 'dean',
-      timestamp: '2025-04-18 13:30',
-    },
-  ]);
-
+export default function PostList({ posts }) {
   return (
     <div className="w-full max-w-2xl flex flex-col space-y-6 mt-8">
       <h2 className="text-2xl font-bold text-[#552834]">Recent Posts</h2>
@@ -39,3 +20,4 @@ export default function PostList() {
     </div>
   );
 }
+

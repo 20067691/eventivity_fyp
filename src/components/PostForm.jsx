@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid'; // Install uuid package if needed
 
-export default function PostForm() {
+export default function PostForm({ posts, setPosts }) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
@@ -13,7 +14,15 @@ export default function PostForm() {
       return;
     }
 
-    console.log('New Post:', { title, content }); // ✅ Later we'll send this to backend
+    const newPost = {
+      postId: uuidv4(), // Random unique ID
+      title: title.trim(),
+      content: content.trim(),
+      username: 'dean', // 👈 Later replace with real logged-in user
+      timestamp: new Date().toLocaleString(),
+    };
+
+    setPosts([newPost, ...posts]); // Add new post to top
     setError('');
     setTitle('');
     setContent('');
