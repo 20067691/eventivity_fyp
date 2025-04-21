@@ -3,10 +3,14 @@ import PostForm from '../components/PostForm';
 import PostList from '../components/PostList';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import Filter from '../components/Filter';
 
 export default function Forum() {
   const { isAuthenticated } = useAuth();
   const [posts, setPosts] = useState([]);
+  const [filter, setFilter] = useState('All');
+
+  const availableFilters = ['All', 'Workshop1', 'Workshop2'];
 
   if (!isAuthenticated) {
     return (
@@ -25,10 +29,17 @@ export default function Forum() {
     );
   }
 
+  console.log('Current Posts:', posts);
+
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-[#F7F4F4] p-6 space-y-8">
       <PostForm setPosts={setPosts} posts={posts} />
-      <PostList posts={posts} />
+      <Filter
+        currentFilter={filter}
+        setFilter={setFilter}
+        availableFilters={availableFilters}
+      />
+      <PostList posts={posts} filter={filter} />
     </div>
   );
 }

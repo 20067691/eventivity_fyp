@@ -3,7 +3,7 @@ import { createContext, useState, useEffect, useContext } from 'react';
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null); // 🛑 Instead of just username
+  const [user, setUser] = useState(null); 
   const [flashMessage, setFlashMessage] = useState(null);
 
 
@@ -25,7 +25,7 @@ export function AuthProvider({ children }) {
     localStorage.removeItem('user');
   };
 
-  const isAuthenticated = !!user; // ✅ Computed
+  const isAuthenticated = !!user; 
 
   return (
     <AuthContext.Provider value={{ user, login, logout, isAuthenticated, flashMessage, setFlashMessage }}>

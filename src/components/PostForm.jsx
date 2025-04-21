@@ -1,12 +1,13 @@
 import { useState } from 'react';
-import { useAuth } from '../context/AuthContext'; // ✅ Import auth context
+import { useAuth } from '../context/AuthContext';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function PostForm({ posts, setPosts }) {
-  const { user } = useAuth(); // ✅ Get user info
+  const { user } = useAuth();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
+  const [eventTag, setEventTag] = useState('Public'); // New state for event tag
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,21 +21,23 @@ export default function PostForm({ posts, setPosts }) {
       postId: uuidv4(),
       title: title.trim(),
       content: content.trim(),
-      username: user?.username || 'anonymous', // ✅ Pull username from context
+      username: user?.username || 'anonymous',
       timestamp: new Date().toLocaleString(),
+      eventTag: eventTag || 'Public', // Default to 'Public' if not set
     };
 
     setPosts([newPost, ...posts]);
     setError('');
     setTitle('');
     setContent('');
+    setEventTag('All'); // Reset event tag to default
   };
 
   return (
     <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md">
       <h2 className="text-2xl font-bold text-[#552834] mb-4">Create a New Post</h2>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
-        
+
         <input
           type="text"
           placeholder="Post Title"
@@ -42,13 +45,23 @@ export default function PostForm({ posts, setPosts }) {
           onChange={(e) => setTitle(e.target.value)}
           className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-[#552834]"
         />
-        
+
         <textarea
           placeholder="What's on your mind?"
           value={content}
           onChange={(e) => setContent(e.target.value)}
           className="border p-3 h-40 rounded resize-none focus:outline-none focus:ring-2 focus:ring-[#552834]"
         ></textarea>
+
+        <select
+          value={eventTag}
+          onChange={(e) => setEventTag(e.target.value)}
+          className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-[#552834]"
+        >
+          <option value="Public">Public</option>
+          <option value="Workshop1">Workshop1</option>
+          <option value="Workshop2">Workshop2</option>
+        </select>
 
         {error && (
           <p className="text-red-500 text-sm">{error}</p>

@@ -3,10 +3,10 @@ import Home from '../pages/Home';
 import SignUp from '../pages/SignUp';
 import ConfirmAccount from '../pages/ConfirmAccount';
 import SignIn from '../pages/SignIn';
-import Layout from '../layouts/Layout'; // Import the Layout component
-import Forum from '../pages/Forum'; // Import the Forum component
-import Schedule from '../pages/Schedule'; // Import the Schedule component
-import ProtectedRoute from '../components/ProtectedRoute'; // Import the ProtectedRoute component
+import Layout from '../layouts/Layout'; 
+import Forum from '../pages/Forum'; 
+import Schedule from '../pages/Schedule'; 
+import ProtectedRoute from '../components/ProtectedRoute'; 
 
 
 export default function AppRoutes() {
