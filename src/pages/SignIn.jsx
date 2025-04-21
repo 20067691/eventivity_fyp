@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { userPool } from '../config/cognitoConfig'; // We'll create this
+import { userPool } from '../config/cognitoConfig'; 
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import {jwtDecode} from 'jwt-decode';
 
@@ -44,7 +44,7 @@ function SignIn() {
             localStorage.setItem('idToken', idToken);
             localStorage.setItem('accessToken', result.getAccessToken().getJwtToken());
       
-            login(userData); // ✅ Save full user object
+            login(userData); 
             navigate(from, { replace: true }); // Redirect back to intended page
           },
           onFailure: (err) => {

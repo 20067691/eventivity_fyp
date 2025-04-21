@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUp } from '../services/CognitoService';
-import SuccessBanner from '../components/SuccessBanner'; // NEW IMPORT
+import SuccessBanner from '../components/SuccessBanner'; 
 
 function SignUp() {
   const [username, setUsername] = useState('');

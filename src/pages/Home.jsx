@@ -2,7 +2,7 @@ import React from 'react';
 import { useAuth } from '../context/AuthContext';
 
 export default function Home() {
-  const { user, logout, isAuthenticated } = useAuth(); // Using everything
+  const { user, logout, isAuthenticated } = useAuth(); 
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#F7F4F4]">

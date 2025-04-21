@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
 import { AuthProvider, useAuth } from './context/AuthContext';
-import { exchangeCodeForToken } from './services/AuthService'; // NEW
+import { exchangeCodeForToken } from './services/AuthService'; 
 
 function SessionManager() {
   const { login, logout } = useAuth();
