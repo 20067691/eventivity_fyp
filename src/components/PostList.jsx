@@ -1,3 +1,4 @@
+// PsotList.jsx
 export default function PostList({ posts, filter }) {
 
   const filteredPosts = filter === 'All'

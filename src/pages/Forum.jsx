@@ -1,3 +1,4 @@
+// Forum.jsx
 import { useAuth } from '../context/AuthContext';
 import PostForm from '../components/PostForm';
 import PostList from '../components/PostList';

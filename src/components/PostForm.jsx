@@ -1,3 +1,4 @@
+// PostForm.jsx
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { v4 as uuidv4 } from 'uuid';
@@ -25,7 +26,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
   
     try {
       const response = await fetch(API_URL, {
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
