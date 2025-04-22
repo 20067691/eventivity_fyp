@@ -8,30 +8,53 @@ export default function PostForm({ posts, setPosts }) {
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
   const [eventTag, setEventTag] = useState('Public'); // New state for event tag
+  const API_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1/posts"
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (!title.trim() || !content.trim()) {
-      setError('Both Title and Content are required.');
+  
+    if (!title || !content) {
+      alert('Title and content are required.');
       return;
     }
 
-    const newPost = {
-      postId: uuidv4(),
-      title: title.trim(),
-      content: content.trim(),
-      username: user?.username || 'anonymous',
-      timestamp: new Date().toLocaleString(),
-      eventTag: eventTag || 'Public', // Default to 'Public' if not set
-    };
+    const newPostId = uuidv4();
+  
+    try {
+      const response = await fetch(API_URL, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          postId: newPostId,
+          title: title,
+          content: content,
+          username: user.username, // Pull from AuthContext!
+          eventTag: eventTag, // From your filter/tag input
+        }),
+      });
+  
+      const data = await response.json();
 
-    setPosts([newPost, ...posts]);
-    setError('');
-    setTitle('');
-    setContent('');
-    setEventTag('All'); // Reset event tag to default
+      if (!response.ok) {
+        throw new Error(data.message || 'Post creation failed');
+      }
+    
+      console.log('Post created successfully:', data.message);
+    
+      // 🟢 Clear the form (optional)
+      setTitle('');
+      setContent('');
+      setEventTag('Public');
+      alert('Post created successfully!');
+  
+    } catch (error) {
+      console.error('Post creation failed:', error.message);
+      alert(error.message);
+    }
   };
+  
 
   return (
     <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md">
