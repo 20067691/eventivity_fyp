@@ -2,16 +2,19 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { v4 as uuidv4 } from 'uuid';
 
-export default function PostForm({ posts, setPosts }) {
+const API_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1/posts"
+
+export default function PostForm({ posts, setPosts, fetchPosts }) {
   const { user } = useAuth();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
   const [eventTag, setEventTag] = useState('Public'); // New state for event tag
-  const API_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1/posts"
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(''); 
   
     if (!title || !content) {
       alert('Title and content are required.');
@@ -42,6 +45,8 @@ export default function PostForm({ posts, setPosts }) {
       }
     
       console.log('Post created successfully:', data.message);
+
+      await fetchPosts(); // Fetch the latest posts after creating a new one
     
       // 🟢 Clear the form (optional)
       setTitle('');

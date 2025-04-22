@@ -2,8 +2,10 @@ import { useAuth } from '../context/AuthContext';
 import PostForm from '../components/PostForm';
 import PostList from '../components/PostList';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Filter from '../components/Filter';
+
+const API_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1/posts";
 
 export default function Forum() {
   const { isAuthenticated } = useAuth();
@@ -11,6 +13,21 @@ export default function Forum() {
   const [filter, setFilter] = useState('All');
 
   const availableFilters = ['All', 'Workshop1', 'Workshop2'];
+
+
+  const fetchPosts = async () => {
+    try {
+      const response = await fetch(API_URL);
+      const data = await response.json();
+      setPosts(data);
+    } catch (error) {
+      console.error('Error fetching posts:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   if (!isAuthenticated) {
     return (
@@ -33,7 +50,7 @@ export default function Forum() {
 
   return (
     <div className="flex flex-col items-center justify-start min-h-screen bg-[#F7F4F4] p-6 space-y-8">
-      <PostForm setPosts={setPosts} posts={posts} />
+      <PostForm setPosts={setPosts} posts={posts} fetchPosts={fetchPosts} />
       <Filter
         currentFilter={filter}
         setFilter={setFilter}
