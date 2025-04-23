@@ -1,13 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
 import CloseButton from "./CloseButton";
 
+const API_BASE_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1";
+
 export default function CommentSection({ isOpen, onClose, postId }) {
-    const [comments, setComments] = useState([
-        { commentId: '1', username: 'Dean', content: 'Awesome post!', timestamp: '2025-04-22' },
-        { commentId: '2', username: 'Rory', content: 'Really helpful!', timestamp: '2025-04-22' }
-    ]);
+    const [comments, setComments] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        if (isOpen) {
+            fetchComments();
+        }
+    }, [isOpen]);
+
+    const fetchComments = async () => {
+        setLoading(true);
+        setError("");
+
+        try {
+            const response = await fetch(`${API_BASE_URL}/posts/${postId}/comments`);
+            if (!response.ok) {
+                throw new Error("Failed to fetch comments");
+            }
+            const data = await response.json();
+            setComments(data);
+        } catch (error) {
+            console.error("Error fetching comments:", error.message);
+            setError("There was a problem fetching comments.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleAddComment = (newComment) => {
+        setComments((prev) => [...prev, newComment]);
+    };
 
     if (!isOpen) return null;
 
@@ -18,12 +48,16 @@ export default function CommentSection({ isOpen, onClose, postId }) {
 
                 <h2 className="text-2xl font-bold text-[#552834] mb-4">Comments</h2>
 
-                <CommentList comments={comments} />
+                {loading ? (
+                    <p className="text-gray-500">Loading comments...</p>
+                ) : error ? (
+                    <p className="text-red-500">{error}</p>
+                ) : (
+                    <CommentList comments={comments} />
+                )}
 
-                <CommentForm
-                    postId={postId}
-                    onAddComment={(newComment) => setComments((prev) => [...prev, newComment])}
-                />
+                <CommentForm postId={postId} onAddComment={handleAddComment} />
+
             </div>
         </div>
     );
