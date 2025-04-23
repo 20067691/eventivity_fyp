@@ -1,6 +1,6 @@
 // PsotList.jsx
 import { useState } from "react";
-import CommentSection from "./CommentSection"; //
+import CommentSection from "./CommentSection"; 
 import CommentButton from "./CommentButton";
 
 

@@ -39,6 +39,21 @@ export default function CommentSection({ isOpen, onClose, postId }) {
         setComments((prev) => [...prev, newComment]);
     };
 
+    const handleDeleteComment = async (commentId) => {
+        try {
+          const res = await fetch(`${API_BASE_URL}/posts/${postId}/comments/${commentId}`, {
+            method: "DELETE",
+          });
+      
+          if (!res.ok) throw new Error("Failed to delete comment");
+      
+          setComments((prev) => prev.filter((c) => c.commentId !== commentId));
+        } catch (err) {
+          console.error("Delete failed:", err.message);
+          alert("Couldn't delete the comment.");
+        }
+      };
+
     if (!isOpen) return null;
 
     return (
@@ -53,7 +68,7 @@ export default function CommentSection({ isOpen, onClose, postId }) {
                 ) : error ? (
                     <p className="text-red-500">{error}</p>
                 ) : (
-                    <CommentList comments={comments} />
+                    <CommentList comments={comments} onDelete={handleDeleteComment} />
                 )}
 
                 <CommentForm postId={postId} onAddComment={handleAddComment} />
@@ -61,4 +76,4 @@ export default function CommentSection({ isOpen, onClose, postId }) {
             </div>
         </div>
     );
-}
+} 
