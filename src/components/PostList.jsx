@@ -1,9 +1,24 @@
 // PsotList.jsx
+import { useState } from "react";
+import CommentSection from "./CommentSection"; //
+import CommentButton from "./CommentButton";
+
+
 export default function PostList({ posts, filter }) {
 
   const filteredPosts = filter === 'All'
-  ? posts
-  : posts.filter(post => post.eventTag === filter);
+    ? posts
+    : posts.filter(post => post.eventTag === filter);
+
+  const [activePostId, setActivePostId] = useState(null);
+
+  const handleOpenComments = (postId) => {
+    setActivePostId(postId);
+  };
+
+  const handleCloseComments = () => {
+    setActivePostId(null);
+  };
 
   // const filteredPosts = posts;
 
@@ -22,6 +37,15 @@ export default function PostList({ posts, filter }) {
             <div className="text-xs text-gray-400 mt-2">
               Event: {post.eventTag}
             </div>
+            <CommentButton onClick={() => handleOpenComments(post.postId)} />
+
+            {activePostId === post.postId && (
+              <CommentSection
+                isOpen={true}
+                onClose={handleCloseComments}
+                postId={post.postId}
+              />
+            )}
           </div>
         ))
       ) : (
