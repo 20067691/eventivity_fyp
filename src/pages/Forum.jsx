@@ -57,7 +57,7 @@ export default function Forum() {
         setFilter={setFilter}
         availableFilters={availableFilters}
       />
-      <PostList posts={posts} filter={filter} />
+      <PostList posts={posts} filter={filter} setPosts={setPosts} />
     </div>
   );
 }

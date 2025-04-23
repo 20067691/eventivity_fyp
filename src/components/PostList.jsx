@@ -1,10 +1,11 @@
 // PsotList.jsx
 import { useState } from "react";
-import CommentSection from "./CommentSection"; 
+import CommentSection from "./CommentSection";
 import CommentButton from "./CommentButton";
+import DeleteButton from "./DeleteButton";
 
-
-export default function PostList({ posts, filter }) {
+const API_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1" 
+export default function PostList({ posts, filter, setPosts }) {
 
   const filteredPosts = filter === 'All'
     ? posts
@@ -20,6 +21,22 @@ export default function PostList({ posts, filter }) {
     setActivePostId(null);
   };
 
+  const handleDeletePost = async (postId) => {
+    try {
+      const res = await fetch(`${API_URL}/posts/${postId}`, {
+        method: "DELETE"
+      });
+
+      if (!res.ok) throw new Error("Failed to delete post");
+
+      // Remove it from the local state
+      setPosts((prev) => prev.filter((p) => p.postId !== postId));
+    } catch (err) {
+      console.error("Failed to delete post:", err.message);
+      alert("Could not delete the post.");
+    }
+  };
+
   // const filteredPosts = posts;
 
   return (
@@ -28,7 +45,7 @@ export default function PostList({ posts, filter }) {
 
       {filteredPosts.length > 0 ? (
         filteredPosts.map((post) => (
-          <div key={post.postId} className="bg-white p-6 rounded-lg shadow-md">
+          <div key={post.postId} className="bg-white p-6 rounded-lg shadow-md relative">
             <h3 className="text-xl font-semibold text-[#552834] mb-2">{post.title}</h3>
             <p className="text-gray-700 mb-4">{post.content}</p>
             <div className="text-sm text-gray-500">
@@ -38,6 +55,9 @@ export default function PostList({ posts, filter }) {
               Event: {post.eventTag}
             </div>
             <CommentButton onClick={() => handleOpenComments(post.postId)} />
+            <div className="absolute top-4 right-4">
+              <DeleteButton onClick={() => handleDeletePost(post.postId)} />
+            </div>
 
             {activePostId === post.postId && (
               <CommentSection
@@ -46,7 +66,10 @@ export default function PostList({ posts, filter }) {
                 postId={post.postId}
               />
             )}
+
           </div>
+
+
         ))
       ) : (
         <p className="text-gray-500">No posts yet for this event.</p>
