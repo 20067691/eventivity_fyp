@@ -1,3 +1,4 @@
+// Home.jsx
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
 
@@ -6,7 +7,7 @@ export default function Home() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#F7F4F4]">
-      <h1 className="text-4xl font-bold text-[#552834] mb-4">Welcome to Eventivity</h1>
+      <h1 className="text-4xl font-bold text-[#552834] mb-4">Welcome to Seanchaí 2026</h1>
 
       {isAuthenticated ? (
         <>

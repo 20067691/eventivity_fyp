@@ -4,6 +4,8 @@ import {
   PutCommand,
   ScanCommand,
   QueryCommand,
+  DeleteCommand,
+  BatchWriteCommand
 } from "@aws-sdk/lib-dynamodb";
 
 const client = new DynamoDBClient({});
@@ -21,7 +23,7 @@ export const handler = async (event) => {
   try {
     switch (event.routeKey) {
 
-      // Create a new post
+      //  Create a new post
       case "POST /posts":
         const postData = JSON.parse(event.body);
         await dynamo.send(new PutCommand({
@@ -38,7 +40,7 @@ export const handler = async (event) => {
         body = { message: "Post created successfully" };
         break;
 
-      // Fetch all posts
+      //  Fetch all posts
       case "GET /posts":
         const allPosts = await dynamo.send(new ScanCommand({
           TableName: postsTable,
@@ -46,7 +48,7 @@ export const handler = async (event) => {
         body = allPosts.Items;
         break;
 
-      // Create a comment for a post
+      //  Create a comment for a post
       case "POST /posts/{postId}/comments":
         const postId = event.pathParameters.postId;
         const commentData = JSON.parse(event.body);
@@ -66,7 +68,7 @@ export const handler = async (event) => {
         body = { message: "Comment created successfully", commentId };
         break;
 
-      // Get all comments for a post
+      //  Get all comments for a post
       case "GET /posts/{postId}/comments":
         const getCommentsPostId = event.pathParameters.postId;
 
@@ -82,7 +84,61 @@ export const handler = async (event) => {
         body = commentResult.Items;
         break;
 
-      // Unsupported routes
+      case "DELETE /posts/{postId}":
+        const postIdToDelete = event.pathParameters.postId;
+
+        // Delete post
+        await dynamo.send(new DeleteCommand({
+          TableName: postsTable,
+          Key: { postId: postIdToDelete }
+        }));
+
+        // Get related comments
+        const commentQuery = await dynamo.send(new QueryCommand({
+          TableName: commentsTable,
+          KeyConditionExpression: "postId = :pid",
+          ExpressionAttributeValues: {
+            ":pid": postIdToDelete
+          }
+        }));
+
+        // Batch delete
+        const deleteRequests = commentQuery.Items.map((item) => ({
+          DeleteRequest: {
+            Key: {
+              postId: item.postId,
+              commentId: item.commentId,
+            },
+          },
+        }));
+
+        if (deleteRequests.length > 0) {
+          await dynamo.send(new BatchWriteCommand({
+            RequestItems: {
+              [commentsTable]: deleteRequests,
+            },
+          }));
+        }
+
+        body = { message: "Post and its comments deleted successfully." };
+        break;
+
+      // Delete a single comment
+      case "DELETE /posts/{postId}/comments/{commentId}":
+        const { postId: delPostId, commentId: delCommentId } = event.pathParameters;
+        console.log("Deleted:", event.pathParameters);
+        await dynamo.send(new DeleteCommand({
+          TableName: commentsTable,
+          Key: {
+            postId: delPostId,
+            commentId: delCommentId
+          }
+        }));
+
+        body = { message: "Comment deleted successfully." };
+        break;
+
+      // unsupported routes
       default:
         throw new Error(`Unsupported route: "${event.routeKey}"`);
     }
