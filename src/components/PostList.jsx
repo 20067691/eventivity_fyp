@@ -4,14 +4,18 @@ import CommentSection from "./CommentSection";
 import CommentButton from "./CommentButton";
 import DeleteButton from "./DeleteButton";
 import useTheme from "../hooks/useTheme";
+import { useEvent } from "../context/EventContext";
 
 const API_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1" 
 export default function PostList({ posts, filter, setPosts }) {
-  const { background, accent, text } = useTheme();
+  const { text } = useTheme();
+  const { selectedEvent } = useEvent();
 
-  const filteredPosts = filter === 'All'
-    ? posts
-    : posts.filter(post => post.eventTag === filter);
+  const filteredPosts = posts.filter(post => {
+    const eventMatch = selectedEvent ? post.eventId === selectedEvent.id : true;
+    const tagMatch = filter === 'All' ? true : post.eventTag === filter;
+    return eventMatch && tagMatch;
+  });
 
   const [activePostId, setActivePostId] = useState(null);
 

@@ -34,6 +34,7 @@ export const handler = async (event) => {
             content: postData.content,
             username: postData.username,
             eventTag: postData.eventTag || 'Public',
+            eventId: postData.eventId || 'Unknown',
             timestamp: new Date().toISOString(),
           },
         }));

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { v4 as uuidv4 } from 'uuid';
 import useTheme from '../hooks/useTheme';
+import { useEvent } from '../context/EventContext';
 
 const API_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1/posts"
 
@@ -13,6 +14,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
   const [error, setError] = useState('');
   const [eventTag, setEventTag] = useState('Public'); 
   const { background, accent, text } = useTheme();
+  const {selectedEvent} = useEvent(); 
 
   
 
@@ -39,6 +41,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
           content: content,
           username: user.username, // Pull from AuthContext!
           eventTag: eventTag, // From your filter/tag input
+          eventId: selectedEvent?.id
         }),
       });
   
