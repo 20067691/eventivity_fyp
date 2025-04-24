@@ -2,22 +2,11 @@
 import { APIProvider, Map, Marker } from "@vis.gl/react-google-maps";
 import { useNavigate } from "react-router-dom";
 import { useEvent } from "../context/EventContext"; 
+import eventData from "../data/eventData";
 
 const mapCenter = { lat: 52.258661144842975, lng: -7.111564759586401 }; // Example: Dublin 52.258661144842975, -7.111564759586401 52.26219222200546, -7.114898093801613
 const zoomLevel = 14;
 
-const events = [
-  {
-    id: "Seanchaí2026",
-    name: "Seanchaí 2026",
-    position: { lat: 52.258661144842975, lng: -7.111564759586401 }
-  },
-  {
-    id: "EcoExpo",
-    name: "Eco Expo",
-    position: { lat: 52.26219222200546, lng: -7.114898093801613 }
-  }
-];
 
 export default function GoogleMapView({ onEventSelect }) {
     const navigate = useNavigate();
@@ -25,7 +14,7 @@ export default function GoogleMapView({ onEventSelect }) {
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
       <Map center={mapCenter} zoom={zoomLevel} style={{ width: "100%", height: "500px" }}>
-        {events.map((event) => (
+        {eventData.map((event) => (
           <Marker
             key={event.id}
             position={event.position}

@@ -3,9 +3,11 @@ import { useState } from "react";
 import CommentSection from "./CommentSection";
 import CommentButton from "./CommentButton";
 import DeleteButton from "./DeleteButton";
+import useTheme from "../hooks/useTheme";
 
 const API_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1" 
 export default function PostList({ posts, filter, setPosts }) {
+  const { background, accent, text } = useTheme();
 
   const filteredPosts = filter === 'All'
     ? posts
@@ -41,12 +43,12 @@ export default function PostList({ posts, filter, setPosts }) {
 
   return (
     <div className="w-full max-w-2xl flex flex-col space-y-6 mt-8">
-      <h2 className="text-2xl font-bold text-[#552834]">Recent Posts</h2>
+      <h2 className="text-2xl font-bold" style={{ color: text }}>Recent Posts</h2>
 
       {filteredPosts.length > 0 ? (
         filteredPosts.map((post) => (
           <div key={post.postId} className="bg-white p-6 rounded-lg shadow-md relative">
-            <h3 className="text-xl font-semibold text-[#552834] mb-2">{post.title}</h3>
+            <h3 className="text-xl font-semiboldmb-2" style={{color: text}}>{post.title}</h3>
             <p className="text-gray-700 mb-4">{post.content}</p>
             <div className="text-sm text-gray-500">
               Posted by <span className="font-semibold">{post.username}</span> on {post.timestamp}

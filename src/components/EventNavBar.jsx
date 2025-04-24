@@ -1,29 +1,31 @@
 // src/components/EventNavBar.jsx
 import { Link } from 'react-router-dom';
 import { useEvent } from '../context/EventContext';
+import useTheme from '../hooks/useTheme'; // Importing the custom hook for theme
 
 export default function EventNavBar() {
     const { selectedEvent } = useEvent(); // Access the selected event from context
+    const { background, text } = useTheme();
   return (
-    <header className="bg-[#F7F4F4] shadow-md py-4 px-6">
+    <header className="shadow-md py-4 px-6" style={{ backgroundColor: background }}>
       <div className="container mx-auto flex items-center justify-between">
-        <div className="text-2xl font-bold" style={{ color: selectedEvent?.themeColor || '#552834' }}>
+        <div className="text-2xl font-bold" style={{ color: text }}>
             {selectedEvent.name || 'Eventivity'}
         </div>
         <nav>
           <ul className="flex space-x-6">
             <li>
-              <Link to="/app/home" className="text-[#552834] hover:underline">
+              <Link to="/app/home" className="hover:underline" style={{ color: text }}>
                 Home
               </Link>
             </li>
             <li>
-              <Link to="/app/schedule" className="text-[#552834] hover:underline">
+              <Link to="/app/schedule" className="hover:underline" style={{ color: text }}>
                 Schedule
               </Link>
             </li>
             <li>
-              <Link to="/app/forum" className="text-[#552834] hover:underline">
+              <Link to="/app/forum" className="hover:underline" style={{ color: text }}>
                 Forum
               </Link>
             </li>
