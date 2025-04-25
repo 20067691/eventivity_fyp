@@ -5,14 +5,22 @@ import {
   ScanCommand,
   QueryCommand,
   DeleteCommand,
-  BatchWriteCommand
+  BatchWriteCommand,
+  GetCommand
 } from "@aws-sdk/lib-dynamodb";
+import { S3Client, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+
 
 const client = new DynamoDBClient({});
 const dynamo = DynamoDBDocumentClient.from(client);
 
 const postsTable = "EventivityPosts";
 const commentsTable = "EventivityComments";
+
+const s3 = new S3Client({ region: "eu-west-1" });
+const BUCKET_NAME = "eventivity-posts-media";
+
 
 export const handler = async (event) => {
   console.log("Received event:", JSON.stringify(event));
@@ -35,6 +43,7 @@ export const handler = async (event) => {
             username: postData.username,
             eventTag: postData.eventTag || 'Public',
             eventId: postData.eventId || 'Unknown',
+            mediaUrl: postData.mediaUrl || null,
             timestamp: new Date().toISOString(),
           },
         }));
@@ -88,6 +97,22 @@ export const handler = async (event) => {
       case "DELETE /posts/{postId}":
         const postIdToDelete = event.pathParameters.postId;
 
+        // Get the post to retrieve mediaUrl
+        const post = await dynamo.send(new GetCommand({
+          TableName: postsTable,
+          Key: { postId: postIdToDelete }
+        }));
+
+        // Delete associated media from S3 if it exists
+        if (post.Item?.mediaUrl) {
+          const key = new URL(post.Item.mediaUrl).pathname.slice(1); // removes leading slash
+          console.log("Deleting media from S3:", key);
+          await s3.send(new DeleteObjectCommand({
+            Bucket: BUCKET_NAME,
+            Key: key
+          }));
+        }
+
         // Delete post
         await dynamo.send(new DeleteCommand({
           TableName: postsTable,
@@ -138,6 +163,35 @@ export const handler = async (event) => {
 
         body = { message: "Comment deleted successfully." };
         break;
+
+
+
+      case "GET /upload-url":
+        const contentType = event.queryStringParameters?.type || "image/jpeg"; // Read MIME type from frontend
+        let extension = "jpg";
+
+        // Match extension based on content type
+        if (contentType === "image/png") extension = "png";
+        if (contentType === "video/mp4") extension = "mp4";
+
+        console.log("Requested file type:", contentType); // Console log the file type for debugging
+
+        const fileName = `uploads/${Date.now()}-${Math.floor(Math.random() * 1000)}.${extension}`;
+
+        const command = new PutObjectCommand({
+          Bucket: BUCKET_NAME,
+          Key: fileName,
+          ContentType: contentType,
+        });
+
+        const signedUrl = await getSignedUrl(s3, command, { expiresIn: 60 });
+
+        body = {
+          uploadUrl: signedUrl,
+          fileUrl: `https://${BUCKET_NAME}.s3.amazonaws.com/${fileName}`,
+        };
+        break;
+
 
       // unsupported routes
       default:

@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.796.0",
     "@vis.gl/react-google-maps": "^1.5.2",
     "amazon-cognito-identity-js": "^6.3.15",
     "oidc-client-ts": "^3.2.0",
