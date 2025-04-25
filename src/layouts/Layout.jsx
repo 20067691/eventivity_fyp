@@ -5,6 +5,7 @@ import EventNavBar from '../components/EventNavBar';
 import LandingNavBar from '../components/LandingNavBar';
 import { useEvent } from '../context/EventContext'; 
 import useTheme from '../hooks/useTheme';
+import MapIcon from '../components/MapIcon';
 
 export default function Layout() {
   const location = useLocation();
@@ -19,6 +20,7 @@ export default function Layout() {
       {isLanding ? <LandingNavBar /> : <EventNavBar />}
       <main className="flex-grow">
         <Outlet /> {/* This renders the child page content */}
+        <MapIcon />
       </main>
     </div>
   );
