@@ -9,7 +9,7 @@ import MapIcon from '../components/MapIcon';
 
 export default function Layout() {
   const location = useLocation();
-  const isLanding = location.pathname === "/" || location.pathname.startsWith("/signin") || location.pathname.startsWith("/signup");
+  const isLanding = location.pathname === "/" || location.pathname.startsWith("/signin") || location.pathname.startsWith("/signup") || location.pathname.startsWith("/confirm");
   const { selectedEvent} = useEvent();
   const { background, accent, text } = useTheme(); 
   

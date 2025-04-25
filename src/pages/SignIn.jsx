@@ -4,6 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { userPool } from '../config/cognitoConfig'; 
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import {jwtDecode} from 'jwt-decode';
+import { Link } from 'react-router-dom';
 
 function SignIn() {
     const { login } = useAuth();
@@ -86,6 +87,10 @@ function SignIn() {
         >
           Sign In
         </button>
+
+        <Link to="/confirm" className="text-blue-600 hover: underline text-center block">
+        Confirm your account
+        </Link>
       </form>
     </div>
   );

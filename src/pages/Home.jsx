@@ -7,7 +7,7 @@ import  useTheme  from '../hooks/useTheme';
 export default function Home() {
   const { user, logout, isAuthenticated } = useAuth();
   const { selectedEvent } = useEvent();
-  const { background, text } = useTheme(); 
+  const { background, text, accent} = useTheme(); 
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen" style={{ backgroundColor: background }}>
@@ -21,7 +21,7 @@ export default function Home() {
           <button
             onClick={logout}
             className="px-4 py-2 text-white rounded hover:bg-[#6a3b48] transition-colors"
-            style={{ backgroundColor: background }}
+            style={{ backgroundColor: accent }}
           >
             Sign Out
           </button>
@@ -32,7 +32,7 @@ export default function Home() {
           <a
             href="/signin"
             className="px-4 py-2 text-white rounded hover:bg-[#6a3b48] transition-colors"
-            style = {{ backgroundColor: background }}
+            style = {{ backgroundColor: accent }}
           >
             Sign In
           </a>
