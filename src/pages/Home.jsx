@@ -1,31 +1,38 @@
+// Home.jsx
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
+import { useEvent } from '../context/EventContext';
+import  useTheme  from '../hooks/useTheme';
 
 export default function Home() {
-  const { user, logout, isAuthenticated } = useAuth(); 
+  const { user, logout, isAuthenticated } = useAuth();
+  const { selectedEvent } = useEvent();
+  const { background, text } = useTheme(); 
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-[#F7F4F4]">
-      <h1 className="text-4xl font-bold text-[#552834] mb-4">Welcome to Eventivity</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen" style={{ backgroundColor: background }}>
+      <h1 className="text-4xl font-bold mb-4" style={{ color: text }}>Welcome to {selectedEvent.name || 'Eventivity'}</h1>
 
       {isAuthenticated ? (
         <>
-          <p className="text-lg text-[#552834] mb-2">
+          <p className="text-lg mb-2" style={{ color: text }}>
             Signed in as <span className="font-semibold">{user.username}</span>
           </p>
           <button
             onClick={logout}
-            className="px-4 py-2 bg-[#552834] text-white rounded hover:bg-[#6a3b48] transition-colors"
+            className="px-4 py-2 text-white rounded hover:bg-[#6a3b48] transition-colors"
+            style={{ backgroundColor: background }}
           >
             Sign Out
           </button>
         </>
       ) : (
         <>
-          <p className="text-lg text-[#552834] mb-2">No user signed in.</p>
+          <p className="text-lg mb-2" style={{ color: text }}>No user signed in.</p>
           <a
             href="/signin"
-            className="px-4 py-2 bg-[#552834] text-white rounded hover:bg-[#6a3b48] transition-colors"
+            className="px-4 py-2 text-white rounded hover:bg-[#6a3b48] transition-colors"
+            style = {{ backgroundColor: background }}
           >
             Sign In
           </a>

@@ -7,6 +7,7 @@ import Layout from '../layouts/Layout';
 import Forum from '../pages/Forum'; 
 import Schedule from '../pages/Schedule'; 
 import ProtectedRoute from '../components/ProtectedRoute'; 
+import Landing from '../pages/Eventivity';
 
 
 export default function AppRoutes() {
@@ -14,16 +15,20 @@ export default function AppRoutes() {
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          <Route index element={<Landing />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="confirm" element={<ConfirmAccount />} />
           <Route path="signin" element={<SignIn />} />
-          <Route path="forum" element={
+          </Route>
+
+          <Route path="/app" element={<Layout />}>
+           <Route path="home" element={<Home />} />
+           <Route path="schedule" element={<Schedule />} />
+           <Route path="forum" element={
             <ProtectedRoute>
               <Forum />
             </ProtectedRoute>
           } />
-          <Route path="schedule" element={<Schedule />} />
         </Route>
       </Routes>
     </Router>

@@ -1,8 +1,12 @@
+import useTheme
+ from "../hooks/useTheme";
 export default function CommentButton({ onClick }) {
+  const { text } = useTheme();
     return (
       <button
         onClick={onClick}
-        className="mt-4 text-sm text-[#552834] flex items-center gap-2 hover:text-[#6a3b48] transition-colors"
+        style={{ color: text }}
+        className="mt-4 text-sm flex items-center gap-2 hover:text-[#6a3b48] transition-colors"
         aria-label="View comments"
       >
         <svg

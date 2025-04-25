@@ -1,21 +1,28 @@
 import React from 'react';
+import useTheme from '../hooks/useTheme';
 
 export default function Filter({ currentFilter, setFilter, availableFilters }) {
+  const { background, accent, text } = useTheme(); 
   return (
     <div className="flex flex-wrap gap-4 justify-center mb-6">
-      {availableFilters.map((filterName) => (
-        <button
-          key={filterName}
-          onClick={() => setFilter(filterName)}
-          className={`px-4 py-2 rounded-lg font-semibold transition-colors
-            ${currentFilter === filterName
-              ? 'bg-[#552834] text-white'
-              : 'bg-white text-[#552834] border border-[#552834] hover:bg-[#F7F4F4]'}
-          `}
-        >
-          {filterName}
-        </button>
-      ))}
+      {availableFilters.map((filterName) => {
+        const isActive = currentFilter === filterName;
+
+        return (
+          <button
+            key={filterName}
+            onClick={() => setFilter(filterName)}
+            className={`px-4 py-2 rounded-lg font-semibold transition-colors`}
+            style={{
+              backgroundColor: isActive ? accent : 'white',
+              color: isActive ? 'white' : text,
+              border: `2px solid ${accent}`
+            }}
+          >
+            {filterName}
+          </button>
+        );
+      })}
     </div>
   );
 }

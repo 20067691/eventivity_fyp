@@ -4,6 +4,7 @@ import App from './App.jsx';
 import './index.css';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { exchangeCodeForToken } from './services/AuthService'; 
+import { EventProvider } from './context/EventContext.jsx';
 
 function SessionManager() {
   const { login, logout } = useAuth();
@@ -57,8 +58,10 @@ function parseJwt(token) {
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-      <SessionManager />
-      <App />
+      <EventProvider>
+       <SessionManager />
+       <App />
+      </EventProvider>
     </AuthProvider>
   </React.StrictMode>
 );

@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { v4 as uuidv4 } from 'uuid';
+import useTheme from '../hooks/useTheme';
+import { useEvent } from '../context/EventContext';
 
 const API_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1/posts"
 
@@ -10,7 +12,10 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
-  const [eventTag, setEventTag] = useState('Public'); // New state for event tag
+  const [eventTag, setEventTag] = useState('Public'); 
+  const { background, accent, text } = useTheme();
+  const {selectedEvent} = useEvent(); 
+
   
 
   const handleSubmit = async (e) => {
@@ -36,6 +41,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
           content: content,
           username: user.username, // Pull from AuthContext!
           eventTag: eventTag, // From your filter/tag input
+          eventId: selectedEvent?.id
         }),
       });
   
@@ -64,7 +70,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
 
   return (
     <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-[#552834] mb-4">Create a New Post</h2>
+      <h2 className="text-2xl font-bold mb-4" style={{color: text}}>Create a New Post</h2>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
 
         <input
@@ -72,20 +78,20 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
           placeholder="Post Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-[#552834]"
+          className="border p-3 rounded focus:outline-none" style={{ borderColor: accent }}
         />
 
         <textarea
           placeholder="What's on your mind?"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="border p-3 h-40 rounded resize-none focus:outline-none focus:ring-2 focus:ring-[#552834]"
+          className="border p-3 h-40 rounded resize-none focus:outline-none" style={{ borderColor: accent }}
         ></textarea>
 
         <select
           value={eventTag}
           onChange={(e) => setEventTag(e.target.value)}
-          className="border p-3 rounded focus:outline-none focus:ring-2 focus:ring-[#552834]"
+          className="border p-3 rounded focus:outline-none" style={{ borderColor: accent }}
         >
           <option value="Public">Public</option>
           <option value="Workshop1">Workshop1</option>
@@ -98,7 +104,8 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
 
         <button
           type="submit"
-          className="bg-[#552834] text-white py-2 px-6 rounded hover:bg-[#6a3b48] transition-colors"
+          style={{ backgroundColor: text }}
+          className="text-white py-2 px-6 rounded hover:bg-[#6a3b48] transition-colors"
         >
           Post
         </button>

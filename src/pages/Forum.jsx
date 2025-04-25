@@ -5,6 +5,7 @@ import PostList from '../components/PostList';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Filter from '../components/Filter';
+import useTheme from '../hooks/useTheme'; 
 
 const API_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1/posts";
 
@@ -12,6 +13,7 @@ export default function Forum() {
   const { isAuthenticated } = useAuth();
   const [posts, setPosts] = useState([]);
   const [filter, setFilter] = useState('All');
+  const {background, text} = useTheme();
 
   const availableFilters = ['All', 'Workshop1', 'Workshop2'];
 
@@ -32,7 +34,7 @@ export default function Forum() {
 
   if (!isAuthenticated) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-[#F7F4F4] p-6">
+      <div className="flex flex-col items-center justify-center min-h-screen p-6" style={{ backgroundColor: background }}>
         <h2 className="text-2xl font-bold text-[#552834] mb-4">Forum Access Restricted</h2>
         <p className="text-lg text-gray-700 mb-6 text-center">
           Please sign in to view and create forum posts.
@@ -50,7 +52,7 @@ export default function Forum() {
   console.log('Current Posts:', posts);
 
   return (
-    <div className="flex flex-col items-center justify-start min-h-screen bg-[#F7F4F4] p-6 space-y-8">
+    <div className="flex flex-col items-center justify-start min-h-screenp-6 space-y-8" style={{ backgroundColor: background }}>
       <PostForm setPosts={setPosts} posts={posts} fetchPosts={fetchPosts} />
       <Filter
         currentFilter={filter}
