@@ -54,6 +54,23 @@ export default function PostList({ posts, filter, setPosts }) {
           <div key={post.postId} className="bg-white p-6 rounded-lg shadow-md relative">
             <h3 className="text-xl font-semiboldmb-2" style={{color: text}}>{post.title}</h3>
             <p className="text-gray-700 mb-4">{post.content}</p>
+            {post.mediaUrl && (
+              <div className="mt-4">
+                {post.mediaUrl.endsWith(".mp4") ? (
+                  <video
+                    controls
+                    className="w-full max-h-64 rounded"
+                    src={post.mediaUrl}
+                  />
+                ) : (
+                  <img
+                    src={post.mediaUrl}
+                    alt="Uploaded content"
+                    className="w-full max-h-64 object-cover rounded"
+                  />
+                )}
+              </div>
+            )}
             <div className="text-sm text-gray-500">
               Posted by <span className="font-semibold">{post.username}</span> on {post.timestamp}
             </div>
