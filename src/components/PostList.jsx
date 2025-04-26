@@ -6,7 +6,7 @@ import DeleteButton from "./DeleteButton";
 import useTheme from "../hooks/useTheme";
 import { useEvent } from "../context/EventContext";
 
-const API_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1" 
+const API_URL = import.meta.env.VITE_API_BASE_URL; 
 export default function PostList({ posts, filter, setPosts }) {
   const { text } = useTheme();
   const { selectedEvent } = useEvent();

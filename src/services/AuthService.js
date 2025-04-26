@@ -1,4 +1,9 @@
-import { clientId, redirectUri, cognitoDomain } from '../config/authConfig';
+//AuthService.js
+//import { clientId, redirectUri, cognitoDomain } from '../config/authConfig';
+
+const clientId = import.meta.env.VITE_COGNITO_CLIENT_ID;
+const redirectUri = import.meta.env.VITE_COGNITO_REDIRECT_URI;
+const cognitoDomain = import.meta.env.VITE_COGNITO_DOMAIN; 
 
 export async function exchangeCodeForToken(code) {
   const tokenUrl = `${cognitoDomain}/oauth2/token`;

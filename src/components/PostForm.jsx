@@ -5,7 +5,8 @@ import { v4 as uuidv4 } from 'uuid';
 import useTheme from '../hooks/useTheme';
 import { useEvent } from '../context/EventContext';
 
-const API_URL = `${import.meta.env.VITE_API_BASE_URL}/posts`;
+const API_URL_POSTS = `${import.meta.env.VITE_API_BASE_URL}/posts`;
+const API_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function PostForm({ posts, setPosts, fetchPosts }) {
   const { user } = useAuth();
@@ -29,7 +30,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
       console.log('Selected file type:', fileType);
 
       // Request a pre-signed URL from your backend
-      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/upload-url?type=${encodeURIComponent(fileType)}`);
+      const response = await fetch(`${API_URL}/upload-url?type=${encodeURIComponent(fileType)}`);
        
       if (!response.ok) {
         const errText = await response.text();
@@ -84,7 +85,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
     const newPostId = uuidv4();
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(API_URL_POSTS, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

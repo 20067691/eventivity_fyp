@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { userPool } from '../config/cognitoConfig'; 
+import { userPool } from '../services/CognitoService';
 import { CognitoUser, AuthenticationDetails } from 'amazon-cognito-identity-js';
 import {jwtDecode} from 'jwt-decode';
 import { Link } from 'react-router-dom';

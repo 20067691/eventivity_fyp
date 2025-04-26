@@ -1,9 +1,10 @@
+//CognitoService.js
 import { useEffect, useState } from "react";
 import CommentList from "./CommentList";
 import CommentForm from "./CommentForm";
 import CloseButton from "./CloseButton";
 
-const API_BASE_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export default function CommentSection({ isOpen, onClose, postId }) {
     const [comments, setComments] = useState([]);

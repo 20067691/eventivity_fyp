@@ -1,8 +1,10 @@
+//CognitoService.js
 import { CognitoUserPool, CognitoUserAttribute, CognitoUser } from 'amazon-cognito-identity-js';
 
+
 const poolData = {
-  UserPoolId: 'eu-west-1_NZqc27Yt8',
-  ClientId: '2617dljqu24q3r5vttdfnmpce9',
+  UserPoolId: import.meta.env.VITE_COGNITO_USER_POOL_ID,
+  ClientId: import.meta.env.VITE_COGNITO_CLIENT_ID, 
 };
 
 const userPool = new CognitoUserPool(poolData);
@@ -47,5 +49,7 @@ export function confirmUser(username, code) {
       });
     });
   }
+
+  export {userPool};
   
 
