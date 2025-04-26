@@ -8,6 +8,8 @@ import Forum from '../pages/Forum';
 import Schedule from '../pages/Schedule'; 
 import ProtectedRoute from '../components/ProtectedRoute'; 
 import Landing from '../pages/Eventivity';
+import WorkshopPage from '../pages/WorkshopPage';
+import WorkshopDetail from '../pages/WorkshopDetail';
 
 
 export default function AppRoutes() {
@@ -24,6 +26,8 @@ export default function AppRoutes() {
           <Route path="/app" element={<Layout />}>
            <Route path="home" element={<Home />} />
            <Route path="schedule" element={<Schedule />} />
+           <Route path="/workshops" element={<WorkshopPage />} />
+           <Route path="/workshops/:slug" element={<WorkshopDetail />} />
            <Route path="forum" element={
             <ProtectedRoute>
               <Forum />
