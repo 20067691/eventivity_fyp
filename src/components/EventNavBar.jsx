@@ -29,6 +29,11 @@ export default function EventNavBar() {
                 Forum
               </Link>
             </li>
+              <li>
+              <Link to="/app/workshops" className="hover:underline" style={{ color: text }}>
+                Workshops
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>

@@ -31,7 +31,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
 
       // Request a pre-signed URL from your backend
       const response = await fetch(`${API_URL}/upload-url?type=${encodeURIComponent(fileType)}`);
-       
+
       if (!response.ok) {
         const errText = await response.text();
         console.error('Error fetching upload URL:', errText);
@@ -39,7 +39,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
       }
       console.log("Response from upload URL request:", `/upload-url?type=${file.type}`);
       // Parse the response to get the upload URL and file URL
-      const { uploadUrl, fileUrl} = await response.json();
+      const { uploadUrl, fileUrl } = await response.json();
 
       // Upload the file to S3 using the pre-signed URL
       await fetch(uploadUrl, {
@@ -96,7 +96,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
           content: content,
           username: user.username, // Pull from AuthContext!
           eventTag: eventTag, // From your filter/tag input
-          eventId: selectedEvent?.id, 
+          eventId: selectedEvent?.id,
           mediaUrl: mediaUrl, // URL of the uploaded file
         }),
       });
@@ -111,11 +111,14 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
 
       await fetchPosts(); // Fetch the latest posts after creating a new one
 
-      // Clear the form (optional)
+      // Clear the form 
       setTitle('');
       setContent('');
       setEventTag('Public');
-      alert('Post created successfully!');
+      setSelectedFile(null);
+      setUploadedFileUrl(null);
+      console.log('Post created successfully!');
+
 
     } catch (error) {
       console.error('Post creation failed:', error.message);
@@ -144,21 +147,32 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
           className="border p-3 h-40 rounded resize-none focus:outline-none" style={{ borderColor: accent }}
         ></textarea>
 
-        <div className="rounded-md border border-indigo-500 bg-gray-50 p-4 shadow-md w-36 mx-auto">
-          <label htmlFor="upload" className="flex flex-col items-center gap-2 cursor-pointer">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 fill-white stroke-indigo-500" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-            </svg>
-            <span className="text-gray-600 font-medium">Upload file</span>
-          </label>
-          <input
-            id="upload"
-            type="file"
-            accept="image/jpeg,image/png,video/mp4"
-            className="hidden"
-            onChange={(e) => setSelectedFile(e.target.files[0])}
-          />
+        <div className="w-full flex flex-col items-center">
+          {!selectedFile ? (
+            <label htmlFor="upload" className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded cursor-pointer text-sm font-medium">
+              Upload File
+              <input
+                id="upload"
+                type="file"
+                accept="image/jpeg,image/png,video/mp4"
+                className="hidden"
+                onChange={(e) => setSelectedFile(e.target.files[0])}
+              />
+            </label>
+          ) : (
+            <div className="flex items-center gap-2 mt-2 bg-gray-100 px-3 py-2 rounded shadow">
+              <p className="text-sm text-gray-700 truncate max-w-xs">{selectedFile.name}</p>
+              <button
+                type="button"
+                onClick={() => setSelectedFile(null)}
+                className="text-red-500 text-sm font-bold"
+              >
+                ✕
+              </button>
+            </div>
+          )}
         </div>
+
 
         <select
           value={eventTag}

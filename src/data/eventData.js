@@ -1,3 +1,4 @@
+// eventData.js
 const eventData = [
     {
       id: "Seanchaí2026",
