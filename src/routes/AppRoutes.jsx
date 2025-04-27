@@ -26,8 +26,8 @@ export default function AppRoutes() {
           <Route path="/app" element={<Layout />}>
            <Route path="home" element={<Home />} />
            <Route path="schedule" element={<Schedule />} />
-           <Route path="/workshops" element={<WorkshopPage />} />
-           <Route path="/workshops/:slug" element={<WorkshopDetail />} />
+           <Route path="workshops" element={<WorkshopPage />} />
+           <Route path="workshops/:slug" element={<WorkshopDetail />} />
            <Route path="forum" element={
             <ProtectedRoute>
               <Forum />

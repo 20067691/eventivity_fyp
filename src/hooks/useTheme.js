@@ -1,3 +1,4 @@
+//useTheme.js
 import { useEvent } from '../context/EventContext';
 
 export default function useTheme() {
