@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { signUp } from '../services/CognitoService';
-import SuccessBanner from '../components/SuccessBanner'; 
+import SuccessBanner from '../components/SuccessBanner';
+import BeamBorder from '../components/BeamBorder';
+import { Link } from 'react-router-dom';
 
 function SignUp() {
   const [username, setUsername] = useState('');
@@ -36,20 +38,30 @@ function SignUp() {
   };
 
   return (
+    //<h1 className="text-4xl font-bold text-[#9c40ff] mb-6">Sign Up</h1>
     <div className="flex flex-col items-center justify-center min-h-screen bg-[#F7F4F4]">
-      {!signupSuccess ? (
+
+
+      <div className="relative w-full max-w-sm bg-white p-6 rounded shadow-md overflow-hidden">
+        <BeamBorder size={100} />
+        <BeamBorder
+          delay={3}
+          size={200}
+        />
+
+{!signupSuccess ? (
         <form
           onSubmit={handleSubmit}
-          className="p-8 bg-white rounded shadow-md w-full max-w-md"
+          className="space-y-4"
         >
-          <h2 className="text-2xl font-bold text-center mb-6 text-[#552834]">Create Account</h2>
+          <h2 className="text-2xl font-bold text-center mb-6 text-[#9c40ff]">Create Account</h2>
 
           <input
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className="w-full px-4 py-2 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-[#552834]"
+            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#9c40ff]"
             required
           />
 
@@ -58,7 +70,7 @@ function SignUp() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-2 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-[#552834]"
+            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#9c40ff]"
             required
           />
 
@@ -67,7 +79,7 @@ function SignUp() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-2 mb-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#552834]"
+            className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-[#9c40ff]"
             required
           />
 
@@ -89,10 +101,16 @@ function SignUp() {
 
           <button
             type="submit"
-            className="w-full mt-4 bg-[#552834] text-white py-2 rounded hover:bg-[#6a3742] transition-colors"
+            className="w-full mt-4 bg-[#9c40ff] text-white py-2 rounded hover:bg-[#F7F4F4] hover:text-[#9c40ff] transition-colors"
           >
             Sign Up
           </button>
+          {/* Link back to Sign In */}
+          <div className="text-center mt-4">
+            <Link to="/signin" className="text-[#9c40ff] hover:underline">
+              Already have an account? Sign In
+            </Link>
+          </div>
         </form>
       ) : (
         <SuccessBanner
@@ -101,6 +119,8 @@ function SignUp() {
         />
       )}
     </div>
+    </div>
+
   );
 }
 
