@@ -10,7 +10,7 @@ export default function AvatarDropdown() {
   const { logout, user } = useAuth();
 
   const handleLogout = async () => {
-    await logout();
+    logout();
     navigate("/");
   };
 
