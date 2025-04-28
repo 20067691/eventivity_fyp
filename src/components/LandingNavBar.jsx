@@ -1,25 +1,37 @@
 // src/components/LandingNavBar.jsx
 import { Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import AvatarDropdown from './AvatarDropdown';
 
 export default function LandingNavBar() {
+  const { user } = useAuth(); // Access the user from context
+
   return (
-    <header className="bg-[#F7F4F4] shadow-md py-4 px-6">
-      <div className="container mx-auto flex items-center justify-between">
-        <div className="text-2xl font-bold text-[#552834]">Eventivity</div>
-        <nav>
-          <ul className="flex space-x-6">
-            <li>
-              <Link to="/signin" className="text-[#552834] hover:underline">
-                Sign In
-              </Link>
-            </li>
-            <li>
-              <Link to="/signup" className="text-[#552834] hover:underline">
-                Sign Up
-              </Link>
-            </li>
-          </ul>
-        </nav>
+    <header className="bg-[#F7F4F4] shadow-xl/20 py-6 px-4">
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-4">
+
+        <div className="flax-1">
+          <Link to="/" className="text-2xl font-bold text-[#9c40ff]">
+            Eventivity
+          </Link>
+        </div>
+
+        <div className="flex-1 flex justify-end">
+          {user ? (
+            <AvatarDropdown /> 
+          ) : (
+            <nav>
+              <div className="flex space-x-6">
+                <Link to="/signin" className="text-[#9c40ff] hover:underline">
+                  Sign In
+                </Link>
+                <Link to="/signup" className="text-[#9c40ff] hover:underline">
+                  Sign Up
+                </Link>
+              </div>
+            </nav>
+          )}
+        </div>
       </div>
     </header>
   );
