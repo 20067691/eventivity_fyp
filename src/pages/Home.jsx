@@ -13,7 +13,7 @@ export default function Home() {
     <div className="flex flex-col items-center justify-center min-h-screen" style={{ backgroundColor: background }}>
       <h1 className="text-4xl font-bold mb-4" style={{ color: text }}>Welcome to {selectedEvent.name || 'Eventivity'}</h1>
 
-      {isAuthenticated ? (
+      {/* {isAuthenticated ? (
         <>
           <p className="text-lg mb-2" style={{ color: text }}>
             Signed in as <span className="font-semibold">{user.username}</span>
@@ -37,7 +37,7 @@ export default function Home() {
             Sign In
           </a>
         </>
-      )}
+      )} */}
     </div>
   );
 }
