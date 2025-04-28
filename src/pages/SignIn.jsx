@@ -62,11 +62,12 @@ function SignIn() {
 
       <div className="relative w-full max-w-sm bg-white p-6 rounded shadow-md overflow-hidden">
         <BeamBorder
-          size={100}
+          size={200}
+          duration={6}
 
         />
         <BeamBorder
-
+          duration={6}
           delay={3}
           size={200}
         />
