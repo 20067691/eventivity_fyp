@@ -25,7 +25,7 @@ export default function Skeleton() {
         repeat: Infinity,
         repeatType: "reverse",
       }}
-      className="w-full h-[120px] rounded-lg bg-gradient-to-br from-pink-400 via-purple-400 to-indigo-400 bg-dot-black/[0.2]"
+      className="w-full h-[150px] rounded-lg bg-gradient-to-br from-pink-400 via-purple-400 to-indigo-400 bg-dot-black/[0.2]"
       style={{
         background:
           "linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab)",

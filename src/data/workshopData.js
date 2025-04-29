@@ -6,7 +6,7 @@ const workshops = [
     slug: "architecture",
     eventId: "Seanchaí2026",
     className: "md:col-span-2",
-   //icon: 
+    image: "/images/seanchaí.png" 
   },
   {
     title: "Digital Fabrication Basics",

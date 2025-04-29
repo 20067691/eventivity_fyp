@@ -4,6 +4,7 @@
 // The grid items can contain a title, description, and an icon, and they have hover effects for interactivity.
 
 import { cn } from "../../lib/utils";
+import useTheme from "../../hooks/useTheme";
 
 export const BentoGrid = ({
   className,
@@ -12,7 +13,7 @@ export const BentoGrid = ({
   return (
     <div
       className={cn(
-        "mx-auto grid max-w-7xl grid-cols-1 gap-4 md:auto-rows-[18rem] md:grid-cols-3",
+        "max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-2 w-full px-2",
         className
       )}>
       {children}
@@ -28,22 +29,30 @@ export const BentoGridItem = ({
   icon,
   onClick,
 }) => {
+  const { background, text, accent } = useTheme();
   return (
     <div
       onClick={onClick}
       className={cn(
-        "group/bento shadow-input flex flex-col justify-between space-y-4 rounded-xl border border-neutral-200 bg-white p-4 transition duration-200 hover:shadow-xl dark:border-white/[0.2] dark:bg-black dark:shadow-none",
+        "group/bento shadow-input flex flex-col justify-between space-y-4 rounded-xl border  p-4 transition duration-200 hover:shadow-xl hover:-translate-y-1 cursor-pointer",
         className
-      )}>
+      )}
+      style={{ backgroundColor: background , borderColor: accent }}
+      >
       {header}
-      <div className="transition duration-200 group-hover/bento:translate-x-2">
+
+      <div className="transition duration-200 group-hover/bento:translate-x-2 space-y-0.5">
         {icon}
         <div
-          className="mt-2 mb-2 font-sans font-bold text-neutral-600 dark:text-neutral-200">
+          className="mt-2 mb-2 font-sans font-bold leading-tight"
+          style={{ color: text }}
+          >
           {title}
         </div>
         <div
-          className="font-sans text-xs font-normal text-neutral-600 dark:text-neutral-300">
+          className="font-sans text-xs font-normal leading-tight"
+          style={{ color: text }}
+          >
           {description}
         </div>
       </div>
