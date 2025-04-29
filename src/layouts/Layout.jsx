@@ -1,4 +1,7 @@
 
+// Layout.jsx
+// This component serves as the main layout for the application, providing a consistent structure across different pages.
+
 import { Outlet, useLocation } from 'react-router-dom';
 import FlashMessage from '../components/FlashMessage';
 import EventNavBar from '../components/EventNavBar';
@@ -9,7 +12,9 @@ import MapIcon from '../components/MapIcon';
 
 export default function Layout() {
   const location = useLocation();
-  const isLanding = location.pathname === "/" || location.pathname.startsWith("/signin") || location.pathname.startsWith("/signup") || location.pathname.startsWith("/confirm");
+  const isLanding = [
+    "/", "/signin", "/signup", "/confirm", "/profile"
+  ].some((path) => location.pathname.startsWith(path));
   const { selectedEvent} = useEvent();
   const { background, accent, text } = useTheme(); 
   
