@@ -1,3 +1,6 @@
+
+// CommentList.jsx
+// This component displays a list of comments passed to it as props. Each comment is displayed with its content, username, and timestamp. If there are no comments, a message is displayed instead.
 import DeleteButton from "./DeleteButton";
 
 export default function CommentList({ comments, onDelete }) {
@@ -14,6 +17,7 @@ export default function CommentList({ comments, onDelete }) {
           >
             <DeleteButton
               onClick={() => onDelete(comment.commentId)}
+              consoleLogMessage={`Comment with ID ${comment.commentId} deleted`}
               />
             <p className="text-gray-800">{comment.content}</p>
             <div className="text-sm text-gray-500 mt-2">

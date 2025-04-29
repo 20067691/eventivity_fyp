@@ -7,6 +7,7 @@ import useTheme from "../hooks/useTheme";
 import { useEvent } from "../context/EventContext";
 
 const API_URL = import.meta.env.VITE_API_BASE_URL; 
+
 export default function PostList({ posts, filter, setPosts }) {
   const { text } = useTheme();
   const { selectedEvent } = useEvent();

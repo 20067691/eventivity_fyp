@@ -64,6 +64,9 @@ export const handler = async (event) => {
         const commentData = JSON.parse(event.body);
         const commentId = Date.now().toString(); // or uuidv4()
 
+        console.log("postId", postId);
+        console.log("commentId", commentId);
+
         await dynamo.send(new PutCommand({
           TableName: commentsTable,
           Item: {
@@ -105,6 +108,7 @@ export const handler = async (event) => {
 
         // Delete associated media from S3 if it exists
         if (post.Item?.mediaUrl) {
+          console.log("Post has mediaUrl:", post.Item.mediaUrl);
           const key = new URL(post.Item.mediaUrl).pathname.slice(1); // removes leading slash
           console.log("Deleting media from S3:", key);
           await s3.send(new DeleteObjectCommand({
@@ -153,6 +157,8 @@ export const handler = async (event) => {
       case "DELETE /posts/{postId}/comments/{commentId}":
         const { postId: delPostId, commentId: delCommentId } = event.pathParameters;
         console.log("Deleted:", event.pathParameters);
+        console.log("postId", delPostId);
+        console.log("commentId", delCommentId);
         await dynamo.send(new DeleteCommand({
           TableName: commentsTable,
           Key: {
@@ -191,6 +197,7 @@ export const handler = async (event) => {
           fileUrl: `https://${BUCKET_NAME}.s3.amazonaws.com/${fileName}`,
         };
         break;
+
 
 
       // unsupported routes

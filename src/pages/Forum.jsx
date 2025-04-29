@@ -7,7 +7,7 @@ import { useState, useEffect } from 'react';
 import Filter from '../components/Filter';
 import useTheme from '../hooks/useTheme'; 
 
-const API_URL = "https://rm394xj7yl.execute-api.eu-west-1.amazonaws.com/v1/posts";
+const API_URL = `${import.meta.env.VITE_API_BASE_URL}/posts`;
 
 export default function Forum() {
   const { isAuthenticated } = useAuth();
