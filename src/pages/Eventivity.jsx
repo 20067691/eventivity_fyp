@@ -5,6 +5,7 @@ import GoogleMapView from "../components/GoogleMap";
 import useTheme from "../hooks/useTheme";
 import { useEvent } from "../context/EventContext";
 import { useEffect } from "react";
+import EventList from "../components/EventList";
 
 export default function Landing() {
   const { background, accent, text } = useTheme();
@@ -24,6 +25,7 @@ export default function Landing() {
       <h1 className="text-3xl font-bold mb-4" style={{ color: text }}>Welcome to Eventivity</h1>
       <p className="text-gray-600 mb-6">Click on an event marker to begin.</p>
       <GoogleMapView onEventSelect={handleEventSelect} />
+      <EventList />
     </div>
   );
 }

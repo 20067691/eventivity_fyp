@@ -5,7 +5,7 @@ import { useEvent } from "../context/EventContext";
 import eventData from "../data/eventData";
 
 const mapCenter = { lat: 52.258661144842975, lng: -7.111564759586401 }; 
-const zoomLevel = 14;
+const zoomLevel = 13;
 
 
 export default function GoogleMapView({ onEventSelect }) {
