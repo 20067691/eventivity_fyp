@@ -35,7 +35,7 @@ export default function WorkshopPage() {
 
 
     return (
-        <div className="p-6">
+        <div className="flex flex-col items-center justify-center p-6">
             <h1 className="text-2xl font-bold mb-6" style={{ color: selectedEvent?.theme?.text || '#212122' }}>
                 Workshops for {selectedEvent?.name}
             </h1>

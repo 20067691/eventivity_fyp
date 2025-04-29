@@ -1,12 +1,22 @@
+// Eventivity.jsx
+// This component serves as the landing page for the Eventivity application.
 import { text } from "framer-motion/client";
 import GoogleMapView from "../components/GoogleMap";
 import useTheme from "../hooks/useTheme";
+import { useEvent } from "../context/EventContext";
+import { useEffect } from "react";
 
 export default function Landing() {
   const { background, accent, text } = useTheme();
+  const { resetToDefaultEvent } = useEvent();
+
+  useEffect(() => {
+    resetToDefaultEvent();
+  }, []);
+
   const handleEventSelect = (event) => {
     console.log("Selected event from Landing page:", event);
-    // Later: setSelectedEvent(event), navigate("/signin"), etc.
+    
   };
 
   return (
