@@ -5,6 +5,7 @@ import './index.css';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { exchangeCodeForToken } from './services/AuthService'; 
 import { EventProvider } from './context/EventContext.jsx';
+import { CalendarProvider } from './context/CalendarContext.jsx';
 
 function SessionManager() {
   const { login, logout } = useAuth();
@@ -59,8 +60,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
       <EventProvider>
+        <CalendarProvider>
        <SessionManager />
        <App />
+        </CalendarProvider>
       </EventProvider>
     </AuthProvider>
   </React.StrictMode>
