@@ -1,3 +1,6 @@
+
+// WorkshopModal.jsx
+// This component is a modal that displays workshop details when a workshop card is clicked.
 import { useNavigate } from "react-router-dom"
 import CloseButton from "./CloseButton"
 import { InteractiveHoverButton } from "./InteractiveHoverButton"

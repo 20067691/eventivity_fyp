@@ -11,8 +11,8 @@ const eventData = [
       }
     },
     {
-      id: "EcoExpo",
-      name: "Eco Expo",
+      id: "Tech Expo",
+      name: "Tech Expo",
       position: { lat: 52.26219222200546, lng: -7.114898093801613 },
       theme: {
         background: "#EFFAF1",

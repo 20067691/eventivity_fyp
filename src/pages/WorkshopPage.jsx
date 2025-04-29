@@ -4,6 +4,7 @@ import WorkshopModal from "../components/WorkshopModal";
 import { useState } from "react";
 import { useEvent } from "../context/EventContext";
 import workshops from "../data/workshopData";
+import  BentoGridDisplay  from "../components/BentoGridDisplay";
 
 
 
@@ -38,15 +39,11 @@ export default function WorkshopPage() {
             <h1 className="text-2xl font-bold mb-6" style={{ color: selectedEvent?.theme?.text || '#212122' }}>
                 Workshops for {selectedEvent?.name}
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {filteredWorkshops.map((workshop) => (
-                    <WorkshopCard
-                        key={workshop.slug}
-                        workshop={workshop}
-                        onClick={() => openModal(workshop)}
-                    />
-                ))}
-            </div>
+
+            <BentoGridDisplay 
+                workshops={filteredWorkshops} 
+                onWorkshopClick={openModal} 
+            />
 
             {modalOpen && selectedWorkshop && (
                 <WorkshopModal onClose={closeModal} workshop={selectedWorkshop} />

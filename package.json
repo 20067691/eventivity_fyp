@@ -11,15 +11,19 @@
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.796.0",
+    "@tabler/icons-react": "^3.31.0",
     "@vis.gl/react-google-maps": "^1.5.2",
     "amazon-cognito-identity-js": "^6.3.15",
+    "clsx": "^2.1.1",
     "framer-motion": "^12.9.2",
     "lucide-react": "^0.503.0",
+    "motion": "^12.9.2",
     "oidc-client-ts": "^3.2.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-oidc-context": "^3.3.0",
     "react-router-dom": "^7.5.0",
+    "tailwind-merge": "^3.2.0",
     "uuid": "^11.1.0"
   },
   "devDependencies": {
