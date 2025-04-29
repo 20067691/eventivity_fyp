@@ -1,10 +1,15 @@
+
+// WorkshopModal.jsx
+// This component is a modal that displays workshop details when a workshop card is clicked.
 import { useNavigate } from "react-router-dom"
 import CloseButton from "./CloseButton"
 import { InteractiveHoverButton } from "./InteractiveHoverButton"
+import useTheme from "../hooks/useTheme";
 
 
 export default function WorkshopModal({ onClose, workshop }) {
     const navigate = useNavigate();
+    const { text } = useTheme();
 
     const handleViewFull = () => {
         console.log("Navigating to Workshop:", workshop.slug);
@@ -22,7 +27,7 @@ export default function WorkshopModal({ onClose, workshop }) {
             <CloseButton onClick={onClose} />
             
             <div className="flex-grow overflow-y-auto">
-              <h2 className="text-2xl font-bold mb-4">{workshop.title}</h2>
+              <h2 className="text-2xl font-bold mb-4" style={{color : text}}>{workshop.title}</h2>
               <p className="text-gray-700 mb-4">{workshop.description}</p>
             </div>
       

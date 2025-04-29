@@ -8,7 +8,7 @@ export default function MapIcon() {
   return (
     <button
       onClick={() => navigate("/")}
-      className="fixed bottom-6 right-6 bg-white border border-gray-300 p-3 rounded-full shadow-lg hover:bg-gray-100 transition"
+      className="fixed bottom-40 left-6 bg-white border border-gray-300 p-3 rounded-full shadow-lg hover:bg-gray-100 transition"
       aria-label="Back to map"
     >
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"

@@ -11,13 +11,13 @@ const eventData = [
       }
     },
     {
-      id: "EcoExpo",
-      name: "Eco Expo",
+      id: "TechExpo",
+      name: "Tech Expo",
       position: { lat: 52.26219222200546, lng: -7.114898093801613 },
       theme: {
-        background: "#EFFAF1",
-        accent: "#50C878",
-        text: "#50C878"
+        background: "#39404D",
+        accent: "#8CA2CF",
+        text: "#F7F4F4"
       }
     }
   ];

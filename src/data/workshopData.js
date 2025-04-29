@@ -1,18 +1,41 @@
 // workshopData.js
 const workshops = [
-    {
-      title: "De(Lore)an Arch",
-      description: "The De(Lore)an workshop, explores the interplay between oral traditions and material culture in shaping collective and individual identity. The final structure serving as both sheltered gathering space and an interactive display, showcasing stories",
-      slug: "architecture",
-      eventId: "Seanchaí2026",
-    },
-    {
-      title: "Recycling Crash Course",
-      description: "Get started with ....!",
-      slug: null, 
-      eventId: "EcoExpo",
-    },
-  ];
+  {
+    title: "De(Lore)an Arch",
+    description: "Explore storytelling through design...",
+    slug: "architecture",
+    eventId: "Seanchaí2026",
+    className: "md:col-span-2",
+    image: "/images/seanchaí.png" 
+  },
+  {
+    title: "Digital Fabrication Basics",
+    description: "Learn about 3D printing and laser cutting.",
+    slug: "digital-fab",
+    eventId: "Seanchaí2026",
+    className: "md:col-span-1",
+  },
+  {
+    title: "Photography Workshop",
+    description: "Take the best photo of a chimney.",
+    slug: "photography",
+    eventId: "Seanchaí2026",
+    className: "md:col-span-1",
+  },
+  {
+    title: "The Future of Tech",
+    description: "Innovations that will change our world.",
+    slug: "future-tech",
+    eventId: "TechExpo",
+  },
+  {
+    title: "Green Energy Revolution",
+    description: "How clean energy is reshaping cities.",
+    slug: "green-energy",
+    eventId: "TechExpo",
+  },
+  
+];
 
   export default workshops;
   
