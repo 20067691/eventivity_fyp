@@ -34,6 +34,12 @@ export default function AvatarDropdown() {
             View Profile
           </button>
           <button
+            onClick={() => { navigate("/calendar"); setOpen(false); }}
+            className="block w-full text-left px-4 py-2 text-[#552834] hover:bg-gray-100"
+          >
+            My Calendar
+          </button>
+          <button
             onClick={() => {handleLogout(); setOpen(false); }}
             className="block w-full text-left px-4 py-2 text-[#552834] hover:bg-gray-100"
           >

@@ -11,6 +11,7 @@ import Landing from '../pages/Eventivity';
 import WorkshopPage from '../pages/WorkshopPage';
 import WorkshopDetail from '../pages/WorkshopDetail';
 import UserProfile from '../pages/UserProfile';
+import CalendarPage from '../pages/CalendarPage';
 
 
 export default function AppRoutes() {
@@ -28,20 +29,28 @@ export default function AppRoutes() {
               <UserProfile />
             </ProtectedRoute>
           } />
+                    <Route
+            path="/calendar"
+            element={
+              <ProtectedRoute>
+                <CalendarPage />
+              </ProtectedRoute>
+            }
+          />
         </Route>
         {/* Application Routes */}
-      <Route path="/app" element={<Layout />}>
-        <Route path="home" element={<Home />} />
-        <Route path="schedule" element={<Schedule />} />
-        <Route path="workshops" element={<WorkshopPage />} />
-        <Route path="workshops/:slug" element={<WorkshopDetail />} />
-        <Route path="forum" element={
-          <ProtectedRoute>
-            <Forum />
-          </ProtectedRoute>
-        } />
-      </Route>
-    </Routes>
+        <Route path="/app" element={<Layout />}>
+          <Route path="home" element={<Home />} />
+          <Route path="schedule" element={<Schedule />} />
+          <Route path="workshops" element={<WorkshopPage />} />
+          <Route path="workshops/:slug" element={<WorkshopDetail />} />
+          <Route path="forum" element={
+            <ProtectedRoute>
+              <Forum />
+            </ProtectedRoute>
+          } />
+        </Route>
+      </Routes>
     </Router >
   );
 }
