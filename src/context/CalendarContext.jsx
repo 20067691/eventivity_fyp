@@ -7,7 +7,14 @@ export function CalendarProvider({ children }) {
 
   // Function to add an event to the calendar
   const addEvent = (event) => {
-    setSavedEvents((prev) => [...prev, event]);
+    setSavedEvents((prev) => {
+        const existingEvent = prev.some((e) => e.id === event.id);
+        if (existingEvent) {
+            return prev;
+        } else {
+            return [...prev, event];
+        }
+    });
   };
 
   // Function to remove an event
