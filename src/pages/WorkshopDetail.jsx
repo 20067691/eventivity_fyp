@@ -65,7 +65,7 @@ export default function WorkshopDetail() {
 
                 {activeTab === "qr" && (
                     <div className="p-4 bg-gray-50 rounded-lg flex justify-center">
-                        <QRCode value={`https://main.d2c6n3hjfqezye.amplifyapp.com/app/workshops/${workshop.slug}`} size={160} />
+                        <QRCode value={`https://your-app-url.com/app/workshops/${workshop.slug}`} size={160} />
                     </div>
                 )}
             </div>

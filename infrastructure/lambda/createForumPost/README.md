@@ -9,5 +9,5 @@ This Lambda function accepts new forum post data from the frontend and inserts i
   "title": "Post Title",
   "content": "Post Content",
   "username": "Username",
-  "eventTag": "Workshop1" // Optional, defaults to Public
+  "eventTag": "Workshop1" 
 }

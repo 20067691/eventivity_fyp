@@ -32,6 +32,6 @@ export default defineConfig({
     }),
   ],
   define: {
-    global: {}, // keep this if something in your app depends on it
+    global: {}, 
   },
 });
