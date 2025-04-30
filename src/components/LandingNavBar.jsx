@@ -19,7 +19,7 @@ export default function LandingNavBar() {
         <div className="flex-1 flex justify-end">
         {user ? (
           <div className="flex items-center space-x-3">
-            <span className="text-sm font-medium text-[#552834]">{user.username}</span>
+            <span className="text-sm font-medium text-[#9c40ff]">{user.username}</span>
             <AvatarDropdown />
           </div>
         ) : (
