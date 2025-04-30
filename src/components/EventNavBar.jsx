@@ -56,10 +56,10 @@ export default function EventNavBar() {
           </div>
         ) : (
             <div className="flex space-x-6">
-              <Link to="/signin" className="text-[#552834] hover:underline">
+              <Link to="/signin" className="hover:underline"style={{ color: text }}>
                 Sign In
               </Link>
-              <Link to="/signup" className="text-[#552834] hover:underline">
+              <Link to="/signup" className=" hover:underline"style={{ color: text }}>
                 Sign Up
               </Link>
             </div>
