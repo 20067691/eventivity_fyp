@@ -14,7 +14,7 @@ export default function Layout() {
   const location = useLocation();
   const isLanding =
   location.pathname === "/" ||
-  ["/signin", "/signup", "/confirm", "/profile"].some((path) =>
+  ["/signin", "/signup", "/confirm", "/profile", "/calendar"].some((path) =>
     location.pathname.startsWith(path)
   );
   //console.log("Current path:", location.pathname);

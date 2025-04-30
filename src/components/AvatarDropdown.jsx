@@ -8,6 +8,7 @@ export default function AvatarDropdown() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { logout, user } = useAuth();
+  const { accent } = useTheme();
 
   const handleLogout = async () => {
     logout();
@@ -21,7 +22,7 @@ export default function AvatarDropdown() {
         src={defaultAvatar} // use user's profile image -> {user?.profileImage || defaultAvatar}
         alt="User Avatar"
         onClick={() => setOpen(!open)}
-        className="w-10 h-10 rounded-full object-cover cursor-pointer border-2 border-[#9c40ff]"
+        className="w-10 h-10 rounded-full object-cover cursor-pointer border-2" style={{ borderColor: accent }}
       />
 
       {/* Dropdown Menu */}

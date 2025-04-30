@@ -12,35 +12,10 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen" style={{ backgroundColor: background }}>
       <h1 className="text-4xl font-bold mb-4" style={{ color: text }}>Welcome to {selectedEvent.name || 'Eventivity'}</h1>
-
-      {isAuthenticated ? (
-        <>
-          <p className="text-lg mb-2" style={{ color: text }}>
-            Signed in as <span className="font-semibold">{user.username}</span>
-          </p>
-          <button
-            onClick={logout}
-            className="px-4 py-2 text-white rounded hover:bg-[#6a3b48] transition-colors"
-            style={{ backgroundColor: accent }}
-          >
-            Sign Out
-          </button>
-        </>
-      ) : (
-        <>
-          <p className="text-lg mb-2" style={{ color: text }}>No user signed in.</p>
-          <a
-            href="/signin"
-            className="px-4 py-2 text-white rounded hover:bg-[#6a3b48] transition-colors"
-            style = {{ backgroundColor: accent }}
-          >
-            Sign In
-          </a>
-        </>
-      )}
-    </div>
-  );
+  </div>
+);
 }
+
 
 
 // This component serves as the landing page for the Eventivity application.

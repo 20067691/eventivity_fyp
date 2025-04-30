@@ -49,10 +49,12 @@ export default function EventNavBar() {
 
         {/* User Authenticated */}
         <div className="flex-1 flex justify-end">
-          {user ? (
-            
+        {user ? (
+          <div className="flex items-center space-x-3">
+            <span className="text-sm font-medium" style={{ color: text }}>{user.username}</span>
             <AvatarDropdown />
-          ) : (
+          </div>
+        ) : (
             <div className="flex space-x-6">
               <Link to="/signin" className="text-[#552834] hover:underline">
                 Sign In

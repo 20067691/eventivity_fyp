@@ -1,15 +1,18 @@
 import { useState } from "react";
 import defaultAvatar from "../assets/react.svg";
 import useTheme from "../hooks/useTheme";
+import { useAuth } from '../context/AuthContext';
 
 export default function UserProfile() {
   const [bio, setBio] = useState("");
   const { accent, background } = useTheme();
+  const { user } = useAuth();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screenpx-4" style={{ backgroundColor: background }}>
       
       <div className="bg-white p-6 rounded shadow-md w-full max-w-sm flex flex-col items-center space-y-4">
+      <span className="justify-center text-lg font-semibold" style={{color: accent}}>{user.username}</span>
 
         <img
           src={defaultAvatar}

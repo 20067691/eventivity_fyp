@@ -10,7 +10,7 @@ const workshops = [
   },
   {
     title: "Digital Fabrication Basics",
-    description: "Learn about 3D printing and laser cutting.",
+    description: "Learn about 3D printing and laser cutting.", // could add larger detail attribute here
     slug: "digital-fab",
     eventId: "Seanchaí2026",
     className: "md:col-span-1",
