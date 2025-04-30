@@ -11,9 +11,8 @@ export default function MapIcon() {
     <button
       onClick={() => navigate("/")}
       className="fixed left-10 top-1/2 transform -translate-y-1/2 
-      p-4 rounded-full shadow-lg border transition hover:scale-105"
+      p-4 rounded-full shadow-lg border transition hover:scale-105 bg-white"
       style={{
-        backgroundColor: background,
         color: text,
         borderColor: accent,
       }}

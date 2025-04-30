@@ -15,7 +15,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
   const [content, setContent] = useState('');
   const [error, setError] = useState('');
   const [eventTag, setEventTag] = useState('Public');
-  const { accent, text } = useTheme();
+  const { accent, text, background } = useTheme();
   const { selectedEvent } = useEvent();
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadng, setUploading] = useState(false);
@@ -130,7 +130,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
 
   return (
     <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4" style={{ color: text }}>Create a New Post</h2>
+      <h2 className="text-2xl font-bold mb-4" style={{ color: background }}>Create a New Post</h2>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
 
         <input
@@ -191,8 +191,8 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
 
         <button
           type="submit"
-          style={{ backgroundColor: text }}
-          className="text-white py-2 px-6 rounded hover:bg-[#6a3b48] transition-colors"
+          style={{ backgroundColor: accent }}
+          className="text-white py-2 px-6 rounded transition-colors hover:opacity-90"
         >
           Post
         </button>

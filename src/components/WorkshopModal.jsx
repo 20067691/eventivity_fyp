@@ -12,13 +12,14 @@ export default function WorkshopModal({ onClose, workshop }) {
     const { text } = useTheme();
 
     const handleViewFull = () => {
-        console.log("Navigating to Workshop:", workshop.slug);
-        if (workshop.slug) {
-            navigate(`/app/workshops/${workshop.slug}`);
-        }
-        else {
-            navigate("/app/workshops");
-        }
+      console.log("Navigating to Workshop:", workshop.slug);
+      if (workshop.slug) {
+        navigate(`/app/workshops/${workshop.slug}`, {
+          state: { workshop },
+        });
+      } else {
+        navigate("/app/workshops");
+      }
     };
 
     return (

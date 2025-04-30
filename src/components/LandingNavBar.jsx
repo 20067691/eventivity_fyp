@@ -17,23 +17,26 @@ export default function LandingNavBar() {
         </div>
 
         <div className="flex-1 flex justify-end">
-          {user ? (
-            <AvatarDropdown /> 
-          ) : (
-            <nav>
-              <div className="flex space-x-6">
-                <Link to="/signin" className="text-[#9c40ff] hover:underline">
-                  Sign In
-                </Link>
-                <Link to="/signup" className="text-[#9c40ff] hover:underline">
-                  Sign Up
-                </Link>
-              </div>
-            </nav>
+        {user ? (
+          <div className="flex items-center space-x-3">
+            <span className="text-sm font-medium text-[#552834]">{user.username}</span>
+            <AvatarDropdown />
+          </div>
+        ) : (
+        <nav>
+          <div className="flex space-x-6">
+            <Link to="/signin" className="text-[#9c40ff] hover:underline">
+              Sign In
+            </Link>
+            <Link to="/signup" className="text-[#9c40ff] hover:underline">
+              Sign Up
+            </Link>
+          </div>
+        </nav>
           )}
-        </div>
       </div>
-    </header>
+    </div>
+    </header >
   );
 }
 // This component serves as the navigation bar for the landing page of the Eventivity application.

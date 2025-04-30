@@ -25,7 +25,7 @@ const eventData = [
       theme: {
         background: "#39404D",
         accent: "#8CA2CF",
-        text: "#F7F4F4"
+        text: "#8CA2CF"
       }
     }
   ];
