@@ -12,9 +12,12 @@ import MapIcon from '../components/MapIcon';
 
 export default function Layout() {
   const location = useLocation();
-  const isLanding = [
-    "/", "/signin", "/signup", "/confirm", "/profile"
-  ].some((path) => location.pathname.startsWith(path));
+  const isLanding =
+  location.pathname === "/" ||
+  ["/signin", "/signup", "/confirm", "/profile"].some((path) =>
+    location.pathname.startsWith(path)
+  );
+  //console.log("Current path:", location.pathname);
   const { selectedEvent} = useEvent();
   const { background, accent, text } = useTheme(); 
   

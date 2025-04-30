@@ -1,18 +1,26 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import useTheme from '../hooks/useTheme';
 
 export default function MapIcon() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { background, accent, text } = useTheme();
 
 
   return (
     <button
       onClick={() => navigate("/")}
-      className="fixed bottom-40 left-6 bg-white border border-gray-300 p-3 rounded-full shadow-lg hover:bg-gray-100 transition"
+      className="fixed left-10 top-1/2 transform -translate-y-1/2 
+      p-4 rounded-full shadow-lg border transition hover:scale-105"
+      style={{
+        backgroundColor: background,
+        color: text,
+        borderColor: accent,
+      }}
       aria-label="Back to map"
     >
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-        strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 text-[#212122]">
+        strokeWidth={1.5} stroke="currentColor" className="w-8 h-8 text-[#212122]">
         <path strokeLinecap="round" strokeLinejoin="round"
           d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
         <path strokeLinecap="round" strokeLinejoin="round"
