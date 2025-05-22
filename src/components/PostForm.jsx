@@ -150,7 +150,11 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
 
         <div className="w-full flex flex-col items-center">
           {!selectedFile ? (
-            <label htmlFor="upload" className="text-white px-4 py-2 rounded cursor-pointer text-sm font-medium"style={{color: accent }}>
+                <label
+                htmlFor="upload"
+                className="px-6 py-2 rounded text-white font-semibold cursor-pointer transition-colors hover:opacity-90"
+                style={{ backgroundColor: accent }}
+              >
               Upload File
               <input
                 id="upload"

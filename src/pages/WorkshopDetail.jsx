@@ -65,7 +65,11 @@ export default function WorkshopDetail() {
 
                 {activeTab === "qr" && (
                     <div className="p-4 bg-gray-50 rounded-lg flex justify-center">
-                        <QRCode value={`https://your-app-url.com/app/workshops/${workshop.slug}`} size={160} />
+                        <img
+                            src={`/Photos_JBBGv5ku9a.png`}
+                            alt="QR code for workshop"
+                            className="w-40 h-40"
+                        />
                     </div>
                 )}
             </div>
