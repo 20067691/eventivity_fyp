@@ -130,7 +130,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
 
   return (
     <div className="w-full max-w-2xl bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold mb-4" style={{ color: background }}>Create a New Post</h2>
+      <h2 className="text-2xl font-bold mb-4" style={{ color: accent }}>Create a New Post</h2>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
 
         <input
@@ -150,7 +150,7 @@ export default function PostForm({ posts, setPosts, fetchPosts }) {
 
         <div className="w-full flex flex-col items-center">
           {!selectedFile ? (
-            <label htmlFor="upload" className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded cursor-pointer text-sm font-medium">
+            <label htmlFor="upload" className="hover:bg-indigo-600 text-white px-4 py-2 rounded cursor-pointer text-sm font-medium">
               Upload File
               <input
                 id="upload"

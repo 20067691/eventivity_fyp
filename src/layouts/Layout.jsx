@@ -13,22 +13,23 @@ import MapIcon from '../components/MapIcon';
 export default function Layout() {
   const location = useLocation();
   const isLanding =
-  location.pathname === "/" ||
-  ["/signin", "/signup", "/confirm", "/profile", "/calendar"].some((path) =>
-    location.pathname.startsWith(path)
-  );
-  //console.log("Current path:", location.pathname);
-  const { selectedEvent} = useEvent();
-  const { background, accent, text } = useTheme(); 
-  
+    location.pathname === "/" ||
+    ["/signin", "/signup", "/confirm", "/profile", "/calendar"].some((path) =>
+      location.pathname.startsWith(path)
+    );
+
+  const isMapButtonVisible = location.pathname !== "/";
+
+  const { selectedEvent } = useEvent();
+  const { background } = useTheme(); 
 
   return (
-    <div className="flex flex-col min-h-screen" style={{ backgroundColor: background}} >
-      <FlashMessage /> {/* This renders flash messages */}
+    <div className="flex flex-col min-h-screen" style={{ backgroundColor: background }}>
+      <FlashMessage />
       {isLanding ? <LandingNavBar /> : <EventNavBar />}
       <main className="flex-grow">
-        <Outlet /> {/* This renders the child page content */}
-        <MapIcon />
+        <Outlet />
+        {isMapButtonVisible && <MapIcon />}
       </main>
     </div>
   );
