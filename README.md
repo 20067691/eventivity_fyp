@@ -68,9 +68,9 @@ Hosted on [AWS Amplify](https://main.abcdef123.amplifyapp.com)\
   /pages            // Route components (Landing, WorkshopPage, etc.)
   /data             // Static data (events, workshops)
   /context          // React context (Auth, Event, Calendar)
-  /hooks            // Custom hooks (useTheme, useAuth)
-  /ui               // Reusable design components (BentoGrid, AvatarDropdown)
-  /assets           // Icons, logos, etc.
+  /hooks            // Custom hooks (useTheme)
+  /ui               // Reusable design components (BentoGrid)
+  /public           // Icons, logos, etc.
 ```
 
 ---
